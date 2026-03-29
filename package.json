@@ -1,0 +1,26 @@
+{
+  "name": "sdet-stlc-portfolio",
+  "version": "1.0.0",
+  "description": "**Soma Sai Dinesh** | QA Automation Engineer | Bengaluru",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somasaic/sdet-stlc-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/somasaic/sdet-stlc-portfolio/issues"
+  },
+  "homepage": "https://github.com/somasaic/sdet-stlc-portfolio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2"
+  }
+}
