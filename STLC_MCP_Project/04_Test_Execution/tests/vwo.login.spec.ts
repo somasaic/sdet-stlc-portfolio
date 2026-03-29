@@ -24,6 +24,15 @@
  *   npx playwright test tests/vwo_login.spec.ts
  *   npx playwright test tests/vwo_login.spec.ts --headed
  *   npx playwright test tests/vwo_login.spec.ts --grep "TC_LOGIN_001"
+ * 
+ * 
+ * 
+ * NOTE: In a production project these tests would be split into
+ * separate spec files by feature area:
+ * auth.spec.ts | validation.spec.ts | session.spec.ts |
+ * navigation.spec.ts | ui.spec.ts | oauth.spec.ts
+ * Single file used here for portfolio clarity.
+ *
  */
 
 import { test, expect, type BrowserContext } from '@playwright/test';
