@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP + STLC Portfolio Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #6366f1;
+    --accent2: #22d3ee;
+    --accent3: #a78bfa;
+    --green: #34d399;
+    --orange: #fb923c;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --card: #13131e;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* POST CARD */
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-card::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .post-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: var(--accent3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .post-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .post-hook {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post-body {
+    color: #b8b8d0;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .post-body strong {
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  .post-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CONCEPT TABS */
+  .concept-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .concept-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .concept-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .concept-btn.active {
+    background: rgba(99,102,241,0.2);
+    border-color: var(--accent);
+    color: var(--accent3);
+  }
+
+  /* CONCEPT PANELS */
+  .concept-panel {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .concept-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .panel-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .compare-col {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .compare-col.highlight {
+    border-color: var(--accent);
+    background: rgba(99,102,241,0.08);
+  }
+
+  .compare-col-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-old { background: rgba(107,107,138,0.2); color: var(--muted); }
+  .badge-new { background: rgba(99,102,241,0.2); color: var(--accent3); }
+  .badge-win { background: rgba(52,211,153,0.2); color: var(--green); }
+
+  .compare-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #b8b8d0;
+    line-height: 1.5;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .dot-muted { background: var(--muted); }
+  .dot-accent { background: var(--accent); }
+  .dot-green { background: var(--green); }
+  .dot-orange { background: var(--orange); }
+
+  /* ARCH DIAGRAM */
+  .arch-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .arch-node {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .arch-node.highlight-node {
+    border-color: var(--accent);
+    background: rgba(99,102,241,0.1);
+  }
+
+  .arch-node.server-node {
+    border-color: var(--accent2);
+    background: rgba(34,211,238,0.08);
+  }
+
+  .arch-node-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .arch-node-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .arch-node-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .arch-arrow-line {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    position: relative;
+  }
+
+  .arch-arrow-line::after {
+    content: '▶';
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    font-size: 10px;
+    color: var(--accent2);
+  }
+
+  .arch-arrow-label {
+    font-size: 9px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 6px;
+    white-space: nowrap;
+  }
+
+  /* METRIC BARS */
+  .metric-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .metric-label {
+    font-size: 13px;
+    color: var(--text);
+    width: 160px;
+    flex-shrink: 0;
+  }
+
+  .metric-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .metric-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .metric-bar {
+    height: 8px;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+
+  .bar-manual { background: var(--muted); }
+  .bar-mcp { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  .metric-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* STLC PHASES */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .phase-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .phase-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .phase-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .phase-mcp {
+    font-size: 11px;
+    color: var(--accent2);
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #c8c8e8;
+    line-height: 1.6;
+  }
+
+  .callout strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* CODE SNIPPET */
+  .code-snip {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #c8c8e8;
+    margin: 16px 0;
+    overflow-x: auto;
+    line-height: 1.7;
+  }
+
+  .kw { color: #818cf8; }
+  .str { color: #34d399; }
+  .cm { color: #4b5563; font-style: italic; }
+  .fn { color: #fb923c; }
+  .var { color: #22d3ee; }
+
+  /* REPO SECTION */
+  .repo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .repo-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .repo-icon {
+    width: 48px; height: 48px;
+    background: rgba(99,102,241,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .repo-info { flex: 1; }
+
+  .repo-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent3);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .repo-desc {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .repo-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .repo-tag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .legend-dot {
+    width: 12px; height: 8px;
+    border-radius: 100px;
+  }
+
+  /* TOOLTIP */
+  .tooltip-wrap { position: relative; display: inline-block; }
+  .tooltip-wrap .tip {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a2e;
+    border: 1px solid var(--accent);
+    color: var(--text);
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    z-index: 10;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tooltip-wrap:hover .tip { display: block; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  @media (max-width: 600px) {
+    .post-stats { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+    .phase-grid { grid-template-columns: repeat(2, 1fr); }
+    .arch-flow { flex-direction: column; }
+    .post-hook { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- LINKEDIN POST -->
+  <div class="post-card fade-up">
+    <div class="post-label">LinkedIn Post — SDET Portfolio</div>
+    <div class="post-hook">I ran a full STLC cycle using AI.<br>Twice. Once manually. Once with MCP.</div>
+    <div class="post-body">
+      Here's what I built recently and what it taught me about the future of QA:<br><br>
+      I applied all 6 STLC phases to VWO Login Dashboard — <strong>manually first</strong>, then using <strong>Playwright MCP + JIRA MCP</strong>.<br><br>
+      The difference was stark. Manual took ~90 minutes. MCP took ~20 minutes — and found <strong>43 elements</strong> vs 8 from the PRD.<br><br>
+      But here's the thing nobody talks about: <strong>you can't use MCP well if you don't understand STLC manually first.</strong> AI amplifies your thinking. It doesn't replace it.<br><br>
+      What I built → published at GitHub ↓
+    </div>
+
+    <div class="post-stats">
+      <div class="stat"><div class="stat-num">43</div><div class="stat-label">elements via MCP</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">stlc phases</div></div>
+      <div class="stat"><div class="stat-num">4.5×</div><div class="stat-label">faster with MCP</div></div>
+      <div class="stat"><div class="stat-num">11</div><div class="stat-label">commits, live repo</div></div>
+    </div>
+
+    <div class="hashtags">
+      <span class="tag">#SDET</span>
+      <span class="tag">#Playwright</span>
+      <span class="tag">#MCP</span>
+      <span class="tag">#QAAutomation</span>
+      <span class="tag">#AIAgents</span>
+      <span class="tag">#GitHub</span>
+      <span class="tag">#TypeScript</span>
+      <span class="tag">#STLC</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT EXPLORER -->
+  <div class="fade-up delay-1">
+    <div class="section-title">Interactive Concept Explorer</div>
+
+    <div class="concept-nav">
+      <button class="concept-btn active" onclick="showPanel('mcp')">How MCP Works</button>
+      <button class="concept-btn" onclick="showPanel('llm')">LLM vs Agent</button>
+      <button class="concept-btn" onclick="showPanel('rest')">REST vs MCP</button>
+      <button class="concept-btn" onclick="showPanel('manual')">Manual vs MCP</button>
+      <button class="concept-btn" onclick="showPanel('stlc')">STLC Phases</button>
+      <button class="concept-btn" onclick="showPanel('repo')">The Repo</button>
+    </div>
+
+    <!-- MCP PANEL -->
+    <div class="concept-panel active" id="panel-mcp">
+      <div class="panel-title">How MCP Works</div>
+      <div class="panel-subtitle">Model Context Protocol — the architecture behind AI-assisted testing</div>
+
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="arch-node-icon">🧑‍💻</div>
+          <div class="arch-node-label">You</div>
+          <div class="arch-node-sub">QA Lead</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">natural language</div>
+        </div>
+        <div class="arch-node highlight-node">
+          <div class="arch-node-icon">✦</div>
+          <div class="arch-node-label">Claude Desktop</div>
+          <div class="arch-node-sub">LLM + MCP Client</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">tool calls</div>
+        </div>
+        <div class="arch-node server-node">
+          <div class="arch-node-icon">🎭</div>
+          <div class="arch-node-label">Playwright MCP</div>
+          <div class="arch-node-sub">MCP Server</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">browser control</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-node-icon">🌐</div>
+          <div class="arch-node-label">VWO Login</div>
+          <div class="arch-node-sub">Live Page</div>
+        </div>
+      </div>
+
+      <div class="arch-flow" style="margin-top: 12px;">
+        <div class="arch-node" style="min-width: 140px; opacity:0"></div>
+        <div style="width: 56px; flex-shrink:0"></div>
+        <div class="arch-node highlight-node">
+          <div class="arch-node-icon">✦</div>
+          <div class="arch-node-label">Claude Desktop</div>
+          <div class="arch-node-sub">LLM + MCP Client</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">tool calls</div>
+        </div>
+        <div class="arch-node server-node">
+          <div class="arch-node-icon">📋</div>
+          <div class="arch-node-label">JIRA MCP</div>
+          <div class="arch-node-sub">MCP Server</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">creates tickets</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-node-icon">🐛</div>
+          <div class="arch-node-label">KAN-1</div>
+          <div class="arch-node-sub">Bug Ticket</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Key insight:</strong> MCP is a standardised protocol. The AI does not hardcode API calls — it discovers available tools at runtime and decides which to call based on your natural language instruction. This is what makes it an Agent, not just a chatbot.
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title">3 Components <span class="badge badge-new">MCP</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Host — Claude Desktop, the application running the LLM</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>MCP Client — built into Claude Desktop, manages server connections</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>MCP Server — Playwright or JIRA, exposes tools the AI can call</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-title">Tools Available <span class="badge badge-win">Live</span></div>
+          <div class="compare-item"><div class="dot dot-green"></div>browser_navigate — go to any URL</div>
+          <div class="compare-item"><div class="dot dot-green"></div>browser_snapshot — extract full DOM accessibility tree</div>
+          <div class="compare-item"><div class="dot dot-green"></div>browser_click, browser_fill — interact with elements</div>
+          <div class="compare-item"><div class="dot dot-green"></div>createJiraIssue — log bugs directly to JIRA board</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LLM vs AGENT PANEL -->
+    <div class="concept-panel" id="panel-llm">
+      <div class="panel-title">LLM vs AI Agent</div>
+      <div class="panel-subtitle">What changes when you connect an LLM to tools</div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title">LLM only <span class="badge badge-old">text in → text out</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Answers questions about Playwright</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Generates test case templates</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Explains STLC concepts</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Cannot navigate a real browser</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Cannot create a real JIRA ticket</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Cannot read live DOM structure</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">AI Agent (LLM + MCP) <span class="badge badge-new">acts in the world</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Navigates to app.vwo.com/#/login</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Extracts 43 real elements from live DOM</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Creates KAN-1 bug ticket in JIRA</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Generates locators from actual page structure</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Runs STLC phases using real tool calls</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Decides which tool to call based on intent</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>The formula:</strong> Agent = LLM + Tools + Decision loop.<br>
+        MCP is the standard that makes connecting tools to LLMs reliable and scalable. Without MCP, each tool integration required custom code. With MCP, any compatible tool connects through the same protocol.
+      </div>
+
+      <div class="code-snip">
+<span class="cm">// Without MCP — you write this</span><br>
+<span class="kw">const</span> <span class="var">response</span> = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'https://api.atlassian.com/jira/issues'</span>, {<br>
+&nbsp;&nbsp;method: <span class="str">'POST'</span>, headers: { Authorization: <span class="str">'Bearer token'</span> },<br>
+&nbsp;&nbsp;body: <span class="fn">JSON.stringify</span>({ fields: { summary: <span class="str">'...'</span> } })<br>
+});<br><br>
+<span class="cm">// With MCP — Claude decides and calls</span><br>
+<span class="cm">// You just say: "Create a bug for the password validation issue"</span><br>
+<span class="cm">// Claude calls: createJiraIssue({ cloudId, projectKey, summary, ... })</span>
+      </div>
+    </div>
+
+    <!-- REST vs MCP PANEL -->
+    <div class="concept-panel" id="panel-rest">
+      <div class="panel-title">REST API vs MCP</div>
+      <div class="panel-subtitle">Two ways to connect software — fundamentally different philosophies</div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title">REST API <span class="badge badge-old">code-to-service</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Your code calls a specific endpoint</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>You must know the exact URL and parameters</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Response format is fixed — JSON or XML</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>You write the integration logic</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Each service has different auth patterns</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Error handling is your responsibility</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">MCP <span class="badge badge-new">AI-to-tool</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>AI discovers available tools at runtime</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>AI decides which tool to call from intent</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Standardised protocol across all tools</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>AI writes the integration logic dynamically</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Single connection pattern for any MCP server</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>AI handles sequencing of multiple calls</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Analogy:</strong> REST API is like calling a specific department by dialling their direct number — you need to know the number. MCP is like telling a smart assistant "arrange a meeting" — it figures out which departments to call, in what order, and handles the back-and-forth.
+      </div>
+
+      <div class="compare-grid" style="margin-top: 16px;">
+        <div class="compare-col">
+          <div class="compare-col-title" style="font-size:13px;">JIRA via REST</div>
+          <div class="code-snip" style="margin: 0; font-size: 11px;">
+<span class="cm"># Step 1 — get project ID</span><br>
+<span class="fn">GET</span> /rest/api/3/project<br><br>
+<span class="cm"># Step 2 — get issue type ID</span><br>
+<span class="fn">GET</span> /rest/api/3/issuetype<br><br>
+<span class="cm"># Step 3 — create issue</span><br>
+<span class="fn">POST</span> /rest/api/3/issue<br>
+{ fields: { project, issuetype... } }
+          </div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title" style="font-size:13px;">JIRA via MCP</div>
+          <div class="code-snip" style="margin: 0; font-size: 11px;">
+<span class="cm"># You say:</span><br>
+<span class="str">"Create a High priority bug in VWO Login</span><br>
+<span class="str"> STLC project — password accepts abc"</span><br><br>
+<span class="cm"># Claude calls in sequence:</span><br>
+<span class="fn">getAccessibleAtlassianResources</span>()<br>
+<span class="fn">getVisibleJiraProjects</span>(...)<br>
+<span class="fn">getJiraProjectIssueTypesMetadata</span>(...)<br>
+<span class="fn">createJiraIssue</span>(...)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANUAL vs MCP PANEL -->
+    <div class="concept-panel" id="panel-manual">
+      <div class="panel-title">Manual vs MCP — Side by Side</div>
+      <div class="panel-subtitle">Same STLC. Same project. Measured difference.</div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot bar-manual"></div>Manual (Block A)</div>
+        <div class="legend-item"><div class="legend-dot bar-mcp"></div>MCP-Assisted</div>
+      </div>
+
+      <div id="metrics">
+        <div class="metric-row">
+          <div class="metric-label">Req. Analysis</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-manual" style="width: 100%"></div>
+              <div class="metric-val">30 min · 8 elements</div>
+            </div>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-mcp" style="width: 7%"></div>
+              <div class="metric-val">2 min · 43 elements</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-label">Test Planning</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-manual" style="width: 67%"></div>
+              <div class="metric-val">20 min</div>
+            </div>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-mcp" style="width: 17%"></div>
+              <div class="metric-val">5 min</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-label">Test Case Design</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-manual" style="width: 100%"></div>
+              <div class="metric-val">30 min · 5 TCs</div>
+            </div>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-mcp" style="width: 33%"></div>
+              <div class="metric-val">10 min · 8 TCs</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-label">Bug Reporting</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-manual" style="width: 33%"></div>
+              <div class="metric-val">10 min · manual JIRA</div>
+            </div>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-mcp" style="width: 3%"></div>
+              <div class="metric-val">1 min · JIRA MCP</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-label" style="color: var(--accent3); font-weight:600;">Total</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-manual" style="width: 100%"></div>
+              <div class="metric-val" style="color: var(--text);">~90 min</div>
+            </div>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar bar-mcp" style="width: 22%"></div>
+              <div class="metric-val" style="color: var(--accent2);">~20 min · 4.5× faster</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 20px;">
+        <strong>The important caveat:</strong> MCP found 43 elements vs 8 in the PRD — including 4 hidden forms the documentation never mentioned. But you cannot validate these findings without understanding what good test cases look like. <strong>Manual first. MCP second. Always.</strong>
+      </div>
+    </div>
+
+    <!-- STLC PHASES PANEL -->
+    <div class="concept-panel" id="panel-stlc">
+      <div class="panel-title">STLC — 6 Phases Applied to VWO Login</div>
+      <div class="panel-subtitle">Each phase produces a real artifact. Each artifact is traceable.</div>
+
+      <div class="phase-grid">
+        <div class="phase-card">
+          <div class="phase-num">PHASE 01</div>
+          <div class="phase-name">Requirement Analysis</div>
+          <div class="phase-mcp">→ 43 elements via MCP snapshot</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 02</div>
+          <div class="phase-name">Test Planning</div>
+          <div class="phase-mcp">→ Scope, risks, entry/exit criteria</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 03</div>
+          <div class="phase-name">Test Case Design</div>
+          <div class="phase-mcp">→ 8 TCs with exact locators</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 04</div>
+          <div class="phase-name">Test Execution</div>
+          <div class="phase-mcp">→ POM + 13 Playwright tests</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 05</div>
+          <div class="phase-name">Defect Reporting</div>
+          <div class="phase-mcp">→ KAN-1 via JIRA MCP</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 06</div>
+          <div class="phase-name">Test Closure</div>
+          <div class="phase-mcp">→ Report + comparison</div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 20px;">
+        <strong>What makes this different:</strong> Block A ran all phases manually using the VWO PRD. The STLC MCP Project ran the same phases using live MCP tools. Both are documented side by side in the GitHub repo — making the comparison concrete and verifiable.
+      </div>
+
+      <div class="code-snip">
+<span class="cm"># The complete pipeline</span><br>
+PRD Read (Manual)<br>
+&nbsp;&nbsp;→ Live DOM Snapshot (Playwright MCP)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ Test Plan → 8 Test Cases → POM Spec<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Bug KAN-1 (JIRA MCP)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Closure Report → <span class="var">GitHub</span> ✓
+      </div>
+    </div>
+
+    <!-- REPO PANEL -->
+    <div class="concept-panel" id="panel-repo">
+      <div class="panel-title">The Portfolio Repository</div>
+      <div class="panel-subtitle">github.com/somasaic/sdet-stlc-portfolio</div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title">Block_A_Manual/ <span class="badge badge-old">Traditional</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div>01_Requirement_Analysis.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>02_Test_Plan.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>03_Test_Cases.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>04_Bug_Report.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>05_Severity_Priority.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>06_Regression_Retesting.md</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>docs/Block_B_Automation.md</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">STLC_MCP_Project/ <span class="badge badge-new">AI-Assisted</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>01_Requirement_Analysis/vwo_live_elements.md</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>02_Test_Plan/test_plan.md</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>03_Test_Cases/test_cases.md</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>04_Test_Execution/pages/LoginPage.ts</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>04_Test_Execution/tests/vwo_login.spec.ts</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>05_Defect_Reports/BUG_Login_PWD001.md</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>06_Test_Closure/closure_report.md</div>
+        </div>
+      </div>
+
+      <div class="repo-card" onclick="window.open('https://github.com/somasaic/sdet-stlc-portfolio','_blank')">
+        <div class="repo-icon">⬡</div>
+        <div class="repo-info">
+          <div class="repo-name">somasaic/sdet-stlc-portfolio</div>
+          <div class="repo-desc">STLC applied to real projects — Manual QA + Playwright MCP + JIRA MCP</div>
+        </div>
+        <div class="repo-tags">
+          <div class="repo-tag">Playwright</div>
+          <div class="repo-tag">TypeScript</div>
+          <div class="repo-tag">MCP</div>
+          <div class="repo-tag">JIRA</div>
+          <div class="repo-tag">CI/CD</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;">
+        <div class="stat"><div class="stat-num">11</div><div class="stat-label">commits</div></div>
+        <div class="stat"><div class="stat-num">13</div><div class="stat-label">playwright tests</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">browsers</div></div>
+      </div>
+      <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#a78bfa;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">⬡ GitHub Repo ↗</a>
+        <a href="https://www.linkedin.com/in/somasaidinesh/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">in LinkedIn ↗</a>
+        <a href="https://somasaicheviti.atlassian.net/jira/software/projects/KAN/boards/1" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#f87171;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">🐛 KAN-1 JIRA ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  function showPanel(id) {
+    document.querySelectorAll('.concept-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.concept-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
