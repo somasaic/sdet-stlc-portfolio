@@ -1,5 +1,7 @@
 # Phase 5 — Defect Reporting (JIRA MCP-Driven)
 
+> **📌 Practice Note:** This bug report is a simulated defect created for STLC portfolio demonstration purposes. It is not a confirmed production vulnerability report submitted to VWO. This project uses VWO Login Dashboard as a practice target based on course material from Pramod Dutta's Playwright Automation Mastery 2026. No internal systems or confidential data were accessed.
+
 **Project:** VWO Login Dashboard  
 **URL:** https://app.vwo.com/#/login  
 **JIRA Board:** somasaicheviti.atlassian.net/jira/software/projects/KAN  
