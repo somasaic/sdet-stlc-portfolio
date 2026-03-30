@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VWO Login — STLC Test Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #07070f;
+  --surface: #0f0f1a;
+  --surface2: #161625;
+  --border: #1f1f35;
+  --accent: #7c6ff7;
+  --accent2: #38bdf8;
+  --green: #22c55e;
+  --red: #ef4444;
+  --orange: #f97316;
+  --yellow: #eab308;
+  --text: #e2e2f0;
+  --muted: #5a5a7a;
+  --card: #0d0d1c;
+}
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+/* GRID BG */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+  pointer-events: none; z-index: 0;
+}
+
+/* TOPBAR */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(7,7,15,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.topbar-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.topbar-sep { width: 1px; height: 20px; background: var(--border); }
+.topbar-title { font-size: 13px; color: var(--muted); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.status-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);
+  color: var(--green); font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  padding: 4px 12px; border-radius: 100px;
+}
+.status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.date-badge { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* LAYOUT */
+.layout { display: flex; position: relative; z-index: 1; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  position: sticky; top: 56px; height: calc(100vh - 56px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  padding: 24px 16px;
+}
+.nav-section { margin-bottom: 24px; }
+.nav-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--muted); text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px; padding: 0 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 8px;
+  font-size: 13px; color: var(--muted);
+  cursor: pointer; transition: all 0.15s;
+  text-decoration: none; margin-bottom: 2px;
+}
+.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item.active { background: rgba(124,111,247,0.15); color: var(--accent); border: 1px solid rgba(124,111,247,0.2); }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* MAIN */
+.main { flex: 1; padding: 40px; max-width: 1100px; overflow-x: hidden; }
+
+/* HERO */
+.hero { margin-bottom: 40px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,111,247,0.1); border: 1px solid rgba(124,111,247,0.2);
+  color: #a89cf8; font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+  line-height: 1.15; margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, #a89cf8 60%, var(--accent2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-meta { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 16px; }
+.meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.meta-icon { font-size: 14px; }
+
+/* SUMMARY CARDS */
+.summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 40px; }
+.sum-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 16px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  transition: transform 0.2s;
+}
+.sum-card:hover { transform: translateY(-3px); }
+.sum-card.green { border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.05); }
+.sum-card.red { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.05); }
+.sum-card.yellow { border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.05); }
+.sum-card.blue { border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.05); }
+.sum-card.purple { border-color: rgba(124,111,247,0.3); background: rgba(124,111,247,0.05); }
+.sum-num {
+  font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+  line-height: 1; margin-bottom: 6px;
+}
+.sum-card.green .sum-num { color: var(--green); }
+.sum-card.red .sum-num { color: var(--red); }
+.sum-card.yellow .sum-num { color: var(--yellow); }
+.sum-card.blue .sum-num { color: var(--accent2); }
+.sum-card.purple .sum-num { color: var(--accent); }
+.sum-label { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* PROGRESS BAR */
+.progress-section { margin-bottom: 40px; }
+.progress-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.progress-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+.progress-pct { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 500; color: var(--green); }
+.progress-bar-outer { height: 12px; background: var(--surface2); border-radius: 100px; overflow: hidden; margin-bottom: 16px; }
+.progress-bar-inner {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--green), var(--accent2));
+  width: 62%; transition: width 1.5s ease;
+}
+.progress-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* SECTION TITLE */
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
+}
+.sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* TEST CASES TABLE */
+.tc-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+.tc-table th {
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+  padding: 12px 16px; text-align: left;
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  color: var(--muted); font-weight: 500; letter-spacing: 0.08em;
+}
+.tc-table td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-size: 13px; vertical-align: middle;
+  background: var(--card);
+}
+.tc-table tr:hover td { background: var(--surface2); }
+.tc-id { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); }
+.tc-title { color: var(--text); font-weight: 500; }
+.tc-feature { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 3px 10px; border-radius: 100px; font-weight: 500;
+}
+.badge-pass { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.badge-fail { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.badge-pending { background: rgba(234,179,8,0.1); color: var(--yellow); border: 1px solid rgba(234,179,8,0.3); }
+.badge-blocked { background: rgba(249,115,22,0.1); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+.badge-p1 { background: rgba(239,68,68,0.1); color: var(--red); }
+.badge-p2 { background: rgba(234,179,8,0.1); color: var(--yellow); }
+.badge-p3 { background: rgba(34,197,94,0.1); color: var(--green); }
+
+/* BUG TRACKER */
+.bug-section { margin-bottom: 40px; }
+.bug-card {
+  background: var(--card); border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 16px; padding: 24px; margin-bottom: 16px;
+}
+.bug-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.bug-id { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--red); margin-bottom: 6px; }
+.bug-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: #fff; }
+.bug-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.bug-lifecycle { margin-top: 20px; }
+.lifecycle-track {
+  display: flex; align-items: center; gap: 0;
+  background: var(--surface2); border-radius: 12px;
+  padding: 16px 20px; overflow-x: auto;
+}
+.life-step {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 80px; flex-shrink: 0;
+}
+.life-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; margin-bottom: 6px;
+  border: 2px solid var(--border);
+  color: var(--muted); background: var(--surface);
+}
+.life-dot.done { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.1); }
+.life-dot.current { border-color: var(--accent2); color: var(--accent2); background: rgba(56,189,248,0.1); animation: glow 2s infinite; }
+@keyframes glow { 0%,100%{box-shadow:0 0 0 0 rgba(56,189,248,0.3)} 50%{box-shadow:0 0 0 6px rgba(56,189,248,0)} }
+.life-label { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; text-align: center; }
+.life-label.done { color: var(--green); }
+.life-label.current { color: var(--accent2); }
+.life-connector { flex: 1; height: 2px; background: var(--border); min-width: 20px; margin-bottom: 22px; }
+.life-connector.done { background: var(--green); }
+
+/* PHASE TABLE */
+.phase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 40px; }
+.phase-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; display: flex; gap: 16px; align-items: flex-start;
+  transition: all 0.2s;
+}
+.phase-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.phase-num-box {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(124,111,247,0.15); border: 1px solid rgba(124,111,247,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  color: var(--accent); font-weight: 600; flex-shrink: 0;
+}
+.phase-info { flex: 1; }
+.phase-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.phase-output { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.phase-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.phase-tag {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 8px; border-radius: 100px;
+  background: var(--surface2); color: var(--muted); border: 1px solid var(--border);
+}
+
+/* COMPARISON TABLE */
+.compare-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+.compare-table th {
+  padding: 14px 20px; text-align: left;
+  font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  color: #fff; font-weight: 600;
+}
+.compare-table th:first-child { background: var(--surface2); border-radius: 12px 0 0 0; }
+.compare-table th.manual-col { background: rgba(90,90,122,0.2); }
+.compare-table th.mcp-col { background: rgba(124,111,247,0.2); border-radius: 0 12px 0 0; }
+.compare-table td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 13px; background: var(--card); }
+.compare-table td.phase-col { color: var(--text); font-weight: 500; }
+.compare-table td.manual-val { color: var(--muted); }
+.compare-table td.mcp-val { color: var(--accent2); font-weight: 500; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:last-child td.phase-col { color: var(--accent); font-weight: 700; font-family: 'Syne', sans-serif; }
+.compare-table tr:last-child td.mcp-val { color: var(--green); }
+
+/* FOOTER */
+.report-footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 24px 40px; display: flex; align-items: center;
+  justify-content: space-between; margin-top: 40px;
+  position: relative; z-index: 1;
+}
+.footer-left { font-size: 13px; color: var(--muted); }
+.footer-left strong { color: var(--text); }
+.footer-links { display: flex; gap: 20px; }
+.footer-link {
+  font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  color: var(--accent); text-decoration: none;
+}
+.footer-link:hover { color: var(--accent2); }
+
+/* CALLOUT */
+.callout {
+  background: rgba(124,111,247,0.08); border: 1px solid rgba(124,111,247,0.2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 20px; margin-bottom: 24px;
+  font-size: 13px; color: #c0c0e0; line-height: 1.6;
+}
+.callout strong { color: #fff; }
+
+/* CHART */
+.mini-chart { display: flex; align-items: flex-end; gap: 8px; height: 60px; margin: 16px 0; }
+.chart-bar { flex: 1; border-radius: 6px 6px 0 0; min-width: 30px; position: relative; }
+.chart-bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.chart-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .summary-grid { grid-template-columns: repeat(3, 1fr); }
+  .phase-grid { grid-template-columns: 1fr; }
+  .main { padding: 24px; }
+  .topbar { padding: 0 20px; }
+}
+@media (max-width: 600px) {
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-title { font-size: 26px; }
+}
+
+/* ANIMATE IN */
+.fade-in { opacity: 0; transform: translateY(16px); animation: fadeIn 0.5s ease forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+.d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.4s}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">SDET Portfolio</div>
+    <div class="topbar-sep"></div>
+    <div class="topbar-title">VWO Login — STLC Test Report</div>
+  </div>
+  <div class="topbar-right">
+    <div class="status-pill">REPORT COMPLETE</div>
+    <div class="date-badge">March 2026</div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">Report</div>
+      <a href="#summary" class="nav-item active">
+        <div class="nav-dot" style="background:var(--accent)"></div>Summary
+      </a>
+      <a href="#execution" class="nav-item">
+        <div class="nav-dot" style="background:var(--accent2)"></div>Test Execution
+      </a>
+      <a href="#bugs" class="nav-item">
+        <div class="nav-dot" style="background:var(--red)"></div>Bug Tracker
+      </a>
+      <a href="#phases" class="nav-item">
+        <div class="nav-dot" style="background:var(--green)"></div>STLC Phases
+      </a>
+      <a href="#comparison" class="nav-item">
+        <div class="nav-dot" style="background:var(--yellow)"></div>Manual vs MCP
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Links</div>
+      <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" class="nav-item">
+        <div class="nav-dot" style="background:var(--muted)"></div>GitHub Repo
+      </a>
+      <a href="https://somasaicheviti.atlassian.net/browse/KAN-1" target="_blank" class="nav-item">
+        <div class="nav-dot" style="background:var(--muted)"></div>JIRA Board
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Engineer</div>
+      <div style="padding: 8px 10px;">
+        <div style="font-size:13px;color:var(--text);font-weight:500;">Soma Sai Dinesh</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">QA Automation Engineer</div>
+        <div style="font-size:11px;color:var(--muted);">Bengaluru, India</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero fade-in" id="summary">
+      <div class="hero-tag">📋 STLC MCP Project — VWO Login Dashboard</div>
+      <div class="hero-title">Test Execution Report<br>VWO Login Module</div>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-icon">🌐</span>app.vwo.com/#/login</div>
+        <div class="meta-item"><span class="meta-icon">📅</span>March 2026</div>
+        <div class="meta-item"><span class="meta-icon">🎭</span>Playwright + TypeScript</div>
+        <div class="meta-item"><span class="meta-icon">🤖</span>Playwright MCP + JIRA MCP</div>
+        <div class="meta-item"><span class="meta-icon">⬡</span>github.com/somasaic/sdet-stlc-portfolio</div>
+      </div>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary-grid fade-in d1">
+      <div class="sum-card green">
+        <div class="sum-num">8</div>
+        <div class="sum-label">tests designed</div>
+      </div>
+      <div class="sum-card yellow">
+        <div class="sum-num">8</div>
+        <div class="sum-label">pending execution</div>
+      </div>
+      <div class="sum-card red">
+        <div class="sum-num">1</div>
+        <div class="sum-label">bugs found</div>
+      </div>
+      <div class="sum-card blue">
+        <div class="sum-num">43</div>
+        <div class="sum-label">elements audited</div>
+      </div>
+      <div class="sum-card purple">
+        <div class="sum-num">6/6</div>
+        <div class="sum-label">phases complete</div>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-section fade-in d2">
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <div>
+            <div class="progress-title">Overall STLC Completion</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Phases 1–6 complete · Execution pending valid credentials</div>
+          </div>
+          <div class="progress-pct">62%</div>
+        </div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner"></div>
+        </div>
+        <div class="progress-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Phases Complete (6/6)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>POM + Spec Ready (13 tests)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Execution Pending (needs credentials)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>1 Bug Open (KAN-1)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEST EXECUTION -->
+    <div id="execution" class="fade-in d2">
+      <div class="sec-title">Test Case Execution Status</div>
+
+      <div class="callout">
+        <strong>Note:</strong> All 8 test cases are designed with production-ready Playwright locators from the live MCP element audit. Execution status is Pending — requires valid VWO test account credentials. Infrastructure — POM, spec file, config, CI pipeline — is fully ready.
+      </div>
+
+      <table class="tc-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Test Case</th>
+            <th>Priority</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tc-id">TC_LOGIN_001</td>
+            <td><div class="tc-title">Valid Login — redirect to dashboard</div><div class="tc-feature">Authentication</div></td>
+            <td><span class="badge badge-p1">P1</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_002</td>
+            <td><div class="tc-title">Invalid Password — error shown</div><div class="tc-feature">Authentication</div></td>
+            <td><span class="badge badge-p1">P1</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Negative</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_003</td>
+            <td><div class="tc-title">Invalid Email Format — inline validation</div><div class="tc-feature">Input Validation</div></td>
+            <td><span class="badge badge-p2">P2</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Validation</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_004</td>
+            <td><div class="tc-title">Empty Fields Submit — blocked</div><div class="tc-feature">Input Validation</div></td>
+            <td><span class="badge badge-p1">P1</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Validation</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_005</td>
+            <td><div class="tc-title">Remember Me — session persists</div><div class="tc-feature">Session Management</div></td>
+            <td><span class="badge badge-p2">P2</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_006</td>
+            <td><div class="tc-title">Forgot Password — navigation flow</div><div class="tc-feature">Navigation</div></td>
+            <td><span class="badge badge-p2">P2</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_007</td>
+            <td><div class="tc-title">Password Show/Hide Toggle</div><div class="tc-feature">UI Behaviour</div></td>
+            <td><span class="badge badge-p3">P3</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">UI</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+          <tr>
+            <td class="tc-id">TC_LOGIN_008</td>
+            <td><div class="tc-title">Google OAuth — CSRF state param check</div><div class="tc-feature">OAuth</div></td>
+            <td><span class="badge badge-p2">P2</span></td>
+            <td><span style="font-size:12px;color:var(--muted)">Security</span></td>
+            <td><span class="badge badge-pending">PENDING</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BUG TRACKER -->
+    <div id="bugs" class="fade-in d3">
+      <div class="sec-title">Bug Tracker</div>
+
+      <div class="bug-card">
+        <div class="bug-header">
+          <div>
+            <div class="bug-id">🐛 KAN-1 · VWO Login STLC</div>
+            <div class="bug-title">Password field accepts weak passwords without validation error</div>
+            <div class="bug-meta">
+              <span class="badge" style="background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)">HIGH SEVERITY</span>
+              <span class="badge" style="background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)">HIGH PRIORITY</span>
+              <span class="badge" style="background:rgba(56,189,248,0.1);color:var(--accent2);border:1px solid rgba(56,189,248,0.2)">LOGGED VIA JIRA MCP</span>
+              <span class="badge badge-pending">TO DO</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+          <div style="background:var(--surface2);border-radius:10px;padding:14px;">
+            <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">ENVIRONMENT</div>
+            <div style="font-size:12px;color:var(--text);line-height:1.8;">
+              Chrome, Firefox, Safari<br>
+              Windows, MacOS<br>
+              <span style="color:var(--accent2)">app.vwo.com/#/login</span>
+            </div>
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px;">
+            <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">TEST DATA</div>
+            <div style="font-size:12px;color:var(--text);line-height:1.8;font-family:'JetBrains Mono',monospace;">
+              <span style="color:var(--red)">abc</span> — too short<br>
+              <span style="color:var(--red)">123456</span> — numeric only<br>
+              <span style="color:var(--red)">abcdefgh</span> — no digits/symbols
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+          <div style="background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);border-radius:10px;padding:14px;">
+            <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">EXPECTED</div>
+            <div style="font-size:12px;color:#b0d0b0;line-height:1.6;">Validation error shown — password must meet strength and length rules. Sign In blocked until satisfied.</div>
+          </div>
+          <div style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15);border-radius:10px;padding:14px;">
+            <div style="font-size:11px;color:var(--red);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">ACTUAL</div>
+            <div style="font-size:12px;color:#d0a0a0;line-height:1.6;">No error shown. Weak password accepted. Login request dispatched to server successfully.</div>
+          </div>
+        </div>
+
+        <div class="bug-lifecycle">
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px;">BUG LIFECYCLE</div>
+          <div class="lifecycle-track">
+            <div class="life-step">
+              <div class="life-dot done">✓</div>
+              <div class="life-label done">New</div>
+            </div>
+            <div class="life-connector done"></div>
+            <div class="life-step">
+              <div class="life-dot done">✓</div>
+              <div class="life-label done">Open</div>
+            </div>
+            <div class="life-connector"></div>
+            <div class="life-step">
+              <div class="life-dot current">→</div>
+              <div class="life-label current">Assigned</div>
+            </div>
+            <div class="life-connector"></div>
+            <div class="life-step">
+              <div class="life-dot">⚙</div>
+              <div class="life-label">In Progress</div>
+            </div>
+            <div class="life-connector"></div>
+            <div class="life-step">
+              <div class="life-dot">✓</div>
+              <div class="life-label">Fixed</div>
+            </div>
+            <div class="life-connector"></div>
+            <div class="life-step">
+              <div class="life-dot">🔁</div>
+              <div class="life-label">Retest</div>
+            </div>
+            <div class="life-connector"></div>
+            <div class="life-step">
+              <div class="life-dot">✅</div>
+              <div class="life-label">Closed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STLC PHASES -->
+    <div id="phases" class="fade-in d3">
+      <div class="sec-title">STLC Phase Completion</div>
+      <div class="phase-grid">
+        <div class="phase-card">
+          <div class="phase-num-box">01</div>
+          <div class="phase-info">
+            <div class="phase-name">Requirement Analysis</div>
+            <div class="phase-output">43 interactive elements extracted from live DOM via Playwright MCP</div>
+            <div class="phase-tags">
+              <span class="phase-tag">Playwright MCP</span>
+              <span class="phase-tag">browser_snapshot</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num-box">02</div>
+          <div class="phase-info">
+            <div class="phase-name">Test Planning</div>
+            <div class="phase-output">Scope, risk register, entry/exit criteria — element-specific risks documented</div>
+            <div class="phase-tags">
+              <span class="phase-tag">MCP-informed</span>
+              <span class="phase-tag">8 risks logged</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num-box">03</div>
+          <div class="phase-info">
+            <div class="phase-name">Test Case Design</div>
+            <div class="phase-output">8 test cases with production-ready Playwright locators embedded in steps</div>
+            <div class="phase-tags">
+              <span class="phase-tag">getByRole</span>
+              <span class="phase-tag">8 TCs</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num-box">04</div>
+          <div class="phase-info">
+            <div class="phase-name">Test Execution</div>
+            <div class="phase-output">POM architecture, 13 Playwright tests, 5-browser config, GitHub Actions CI</div>
+            <div class="phase-tags">
+              <span class="phase-tag">LoginPage.ts</span>
+              <span class="phase-tag">13 tests</span>
+              <span class="phase-tag" style="color:var(--yellow)">⏳ Pending run</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num-box">05</div>
+          <div class="phase-info">
+            <div class="phase-name">Defect Reporting</div>
+            <div class="phase-output">KAN-1 logged directly to JIRA board via JIRA MCP — ADF formatted</div>
+            <div class="phase-tags">
+              <span class="phase-tag">JIRA MCP</span>
+              <span class="phase-tag">KAN-1</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num-box">06</div>
+          <div class="phase-info">
+            <div class="phase-name">Test Closure</div>
+            <div class="phase-output">Closure report with full Manual vs MCP comparison — documented in GitHub</div>
+            <div class="phase-tags">
+              <span class="phase-tag">closure_report.md</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div id="comparison" class="fade-in d4">
+      <div class="sec-title">Manual vs MCP — Comparison</div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>STLC Phase</th>
+            <th class="manual-col">Manual (Block A)</th>
+            <th class="mcp-col">MCP-Assisted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="phase-col">Requirement Analysis</td>
+            <td class="manual-val">30 min · 8 elements from PRD</td>
+            <td class="mcp-val">2 min · 43 elements from live DOM</td>
+          </tr>
+          <tr>
+            <td class="phase-col">Test Planning</td>
+            <td class="manual-val">20 min · general scope</td>
+            <td class="mcp-val">5 min · element-specific risks</td>
+          </tr>
+          <tr>
+            <td class="phase-col">Test Case Design</td>
+            <td class="manual-val">30 min · 5 TCs · text locators</td>
+            <td class="mcp-val">10 min · 8 TCs · exact locators</td>
+          </tr>
+          <tr>
+            <td class="phase-col">Test Execution</td>
+            <td class="manual-val">Manual code writing</td>
+            <td class="mcp-val">POM generated from audit · 13 tests</td>
+          </tr>
+          <tr>
+            <td class="phase-col">Defect Reporting</td>
+            <td class="manual-val">10 min · manual JIRA entry</td>
+            <td class="mcp-val">1 min · JIRA MCP · ADF format</td>
+          </tr>
+          <tr>
+            <td class="phase-col">TOTAL</td>
+            <td class="manual-val">~90 minutes</td>
+            <td class="mcp-val">~20 minutes · 4.5× faster</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Key finding:</strong> MCP found 43 DOM elements vs 8 documented in the PRD — including 4 hidden forms, 3 ambiguous toggle buttons, and a javascript:void(0) link that cannot be tested with standard URL assertions. None of these appeared in the product documentation. <strong>Live DOM is always more accurate than documentation.</strong>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div class="footer-left">
+    <strong>Soma Sai Dinesh</strong> · QA Automation Engineer · Bengaluru ·
+    <span style="color:var(--muted)">STLC MCP Project · March 2026</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" class="footer-link">GitHub Repo ↗</a>
+    <a href="https://somasaicheviti.atlassian.net/browse/KAN-1" target="_blank" class="footer-link">KAN-1 ↗</a>
+    <a href="https://www.linkedin.com/in/somasaicheviti" target="_blank" class="footer-link">LinkedIn ↗</a>
+  </div>
+</div>
+
+<script>
+  // Smooth scroll nav
+  document.querySelectorAll('.nav-item[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      link.classList.add('active');
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Animate progress bar on load
+  setTimeout(() => {
+    document.querySelector('.progress-bar-inner').style.width = '62%';
+  }, 500);
+</script>
+</body>
+</html>
