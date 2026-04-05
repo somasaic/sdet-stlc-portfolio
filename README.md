@@ -15,10 +15,10 @@ applied to a real product — VWO Login Dashboard (app.vwo.com).
 
 Three approaches are documented side by side:
 
-| Approach | Folder | Description |
-|---|---|---|
-| Manual QA | `Block_A_Manual/` | Traditional STLC — PRD analysis, manual test cases, bug reports |
-| AI-Assisted QA | `STLC_MCP_Project/` | MCP-driven STLC — Playwright MCP + JIRA MCP automation |
+| Approach                | Folder               | Description                                                                    |
+| ----------------------- | -------------------- | ------------------------------------------------------------------------------ |
+| Manual QA               | `Block_A_Manual/`    | Traditional STLC — PRD analysis, manual test cases, bug reports                |
+| AI-Assisted QA          | `STLC_MCP_Project/`  | MCP-driven STLC — Playwright MCP + JIRA MCP automation                         |
 | Standard CLI Automation | `STLC_Standard_CLI/` | Playwright + TypeScript + POM + GitHub Actions CI — production-grade framework |
 
 ---
@@ -53,46 +53,60 @@ An SDET chooses Standard CLI over other approaches for four specific reasons:
 
 ### How Standard CLI differs from the other two approaches
 
-| Dimension | Manual QA | MCP-Assisted | Standard CLI |
-|---|---|---|---|
-| Who executes tests | Human tester | AI agent (Claude + MCP) | Playwright runner (automated) |
-| Who writes the framework | Not applicable | MCP generates code | SDET writes every file |
-| Selector strategy | Manual inspection | Codegen / AI suggestion | SDET chooses (getByRole used) |
-| CI/CD integration | None | None | Full GitHub Actions pipeline |
-| Reproducibility | Tester-dependent | Tool-dependent | Deterministic — same result every run |
-| Interview signal | QA process maturity | Emerging AI tooling awareness | Core SDET engineering competency |
-| Maintenance | Manual re-execution | Re-run AI session | Git commit — version controlled |
+| Dimension                | Manual QA           | MCP-Assisted                  | Standard CLI                          |
+| ------------------------ | ------------------- | ----------------------------- | ------------------------------------- |
+| Who executes tests       | Human tester        | AI agent (Claude + MCP)       | Playwright runner (automated)         |
+| Who writes the framework | Not applicable      | MCP generates code            | SDET writes every file                |
+| Selector strategy        | Manual inspection   | Codegen / AI suggestion       | SDET chooses (getByRole used)         |
+| CI/CD integration        | None                | None                          | Full GitHub Actions pipeline          |
+| Reproducibility          | Tester-dependent    | Tool-dependent                | Deterministic — same result every run |
+| Interview signal         | QA process maturity | Emerging AI tooling awareness | Core SDET engineering competency      |
+| Maintenance              | Manual re-execution | Re-run AI session             | Git commit — version controlled       |
 
 ### Project structure
+
 STLC_Standard_CLI/
-├── .github/workflows/playwright.yml   ← GitHub Actions CI pipeline
-├── pages/LoginPage.ts                 ← POM — all VWO selectors and action methods
-├── tests/vwo_login.spec.ts            ← 6 test cases covering login scenarios
-├── playwright.config.ts               ← baseURL, browsers, retries, HTML reporter
-├── tsconfig.json                      ← TypeScript compiler config with node types
-└── README.md                          ← Project-level STLC documentation
+│
+├── .github/
+│ └── workflows/
+│ └── playwright.yml ← GitHub Actions CI pipeline
+│
+├── pages/
+│ └── LoginPage.ts ← POM — VWO selectors and action methods
+│
+├── tests/
+│ └── vwo_login.spec.ts ← 6 test cases across login scenarios
+│
+├── node_modules/ ← auto-generated, excluded from git
+│
+├── playwright.config.ts ← baseURL, browsers, retries, reporter
+├── tsconfig.json ← TypeScript compiler config
+├── package.json ← project dependencies
+├── package-lock.json ← locked dependency versions
+└── README.md ← project-level STLC documentation
 
 ### STLC phases applied
 
-| Phase | What was done | Output |
-|---|---|---|
-| 1 — Requirement Analysis | Identified 6 testable requirements on VWO login page via DOM audit | REQ-01 through REQ-06 |
-| 2 — Test Planning | Defined scope, entry/exit criteria, 5-item risk register, 4 testing types | Test Plan in README |
-| 3 — Test Case Design | 6 TC IDs using equivalence partitioning and boundary value analysis | TC-01 through TC-06 |
-| 4 — Test Automation | Playwright + TypeScript POM, role-based locators, 18 tests across 3 browsers | vwo_login.spec.ts |
-| 5 — Bug Reporting | KAN-1 logged in JIRA — password field has no visibility toggle | JIRA ticket |
-| 6 — Test Closure | 18/18 passed, 0 failed, cross-browser validated, CI pipeline green | HTML report |
+| Phase                    | What was done                                                                | Output                |
+| ------------------------ | ---------------------------------------------------------------------------- | --------------------- |
+| 1 — Requirement Analysis | Identified 6 testable requirements on VWO login page via DOM audit           | REQ-01 through REQ-06 |
+| 2 — Test Planning        | Defined scope, entry/exit criteria, 5-item risk register, 4 testing types    | Test Plan in README   |
+| 3 — Test Case Design     | 6 TC IDs using equivalence partitioning and boundary value analysis          | TC-01 through TC-06   |
+| 4 — Test Automation      | Playwright + TypeScript POM, role-based locators, 18 tests across 3 browsers | vwo_login.spec.ts     |
+| 5 — Bug Reporting        | KAN-1 logged in JIRA — password field has no visibility toggle               | JIRA ticket           |
+| 6 — Test Closure         | 18/18 passed, 0 failed, cross-browser validated, CI pipeline green           | HTML report           |
 
 ### Test results
 
-| Browser | Tests | Passed | Failed |
-|---|---|---|---|
-| Chromium | 6 | 6 | 0 |
-| Firefox | 6 | 6 | 0 |
-| WebKit | 6 | 6 | 0 |
-| **Total** | **18** | **18** | **0** |
+| Browser   | Tests  | Passed | Failed |
+| --------- | ------ | ------ | ------ |
+| Chromium  | 6      | 6      | 0      |
+| Firefox   | 6      | 6      | 0      |
+| WebKit    | 6      | 6      | 0      |
+| **Total** | **18** | **18** | **0**  |
 
 ### How to run locally
+
 ```bash
 cd STLC_Standard_CLI
 npm ci
