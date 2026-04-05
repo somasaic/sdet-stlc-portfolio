@@ -1,0 +1,39 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      working-directory: STLC_Standard_CLI
+      run: npm ci
+
+    - name: Install Playwright browsers
+      working-directory: STLC_Standard_CLI
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests
+      working-directory: STLC_Standard_CLI
+      run: npx playwright test
+
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: STLC_Standard_CLI/playwright-report/
+        retention-days: 30
