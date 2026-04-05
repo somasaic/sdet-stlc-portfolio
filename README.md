@@ -64,26 +64,28 @@ An SDET chooses Standard CLI over other approaches for four specific reasons:
 | Maintenance              | Manual re-execution | Re-run AI session             | Git commit — version controlled       |
 
 ### Project structure
-
+### Project structure
+```
 STLC_Standard_CLI/
 │
 ├── .github/
-│ └── workflows/
-│ └── playwright.yml ← GitHub Actions CI pipeline
+│   └── workflows/
+│       └── playwright.yml          ← GitHub Actions CI pipeline
 │
 ├── pages/
-│ └── LoginPage.ts ← POM — VWO selectors and action methods
+│   └── LoginPage.ts                ← POM — VWO selectors and action methods
 │
 ├── tests/
-│ └── vwo_login.spec.ts ← 6 test cases across login scenarios
+│   └── vwo_login.spec.ts           ← 6 test cases across login scenarios
 │
-├── node_modules/ ← auto-generated, excluded from git
+├── node_modules/                   ← auto-generated, excluded from git
 │
-├── playwright.config.ts ← baseURL, browsers, retries, reporter
-├── tsconfig.json ← TypeScript compiler config
-├── package.json ← project dependencies
-├── package-lock.json ← locked dependency versions
-└── README.md ← project-level STLC documentation
+├── playwright.config.ts            ← baseURL, browsers, retries, reporter
+├── tsconfig.json                   ← TypeScript compiler config
+├── package.json                    ← project dependencies
+├── package-lock.json               ← locked dependency versions
+└── README.md                       ← project-level STLC documentation
+```
 
 ### STLC phases applied
 
