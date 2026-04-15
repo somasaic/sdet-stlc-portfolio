@@ -11,15 +11,16 @@
 ## What This Repository Contains
 
 This portfolio demonstrates end-to-end STLC (Software Testing Life Cycle)
-applied to a real product — VWO Login Dashboard (app.vwo.com).
+applied to real products — VWO Login Dashboard and ReqRes API.
 
-Three approaches are documented side by side:
+Four projects are documented, each building on the previous:
 
-| Approach                | Folder               | Description                                                                    |
-| ----------------------- | -------------------- | ------------------------------------------------------------------------------ |
-| Manual QA               | `Block_A_Manual/`    | Traditional STLC — PRD analysis, manual test cases, bug reports                |
-| AI-Assisted QA          | `STLC_MCP_Project/`  | MCP-driven STLC — Playwright MCP + JIRA MCP automation                         |
-| Standard CLI Automation | `STLC_Standard_CLI/` | Playwright + TypeScript + POM + GitHub Actions CI — production-grade framework |
+| Project                     | Folder               | Description                                                            |
+| --------------------------- | -------------------- | ---------------------------------------------------------------------- |
+| Manual QA                   | `Block_A_Manual/`    | Traditional STLC — PRD analysis, manual test cases, bug reports        |
+| AI-Assisted QA              | `STLC_MCP_Project/`  | MCP-driven STLC — Playwright MCP + JIRA MCP automation                 |
+| Standard CLI (Week 1)       | `STLC_Standard_CLI/` | Playwright + TypeScript + POM + GitHub Actions CI — UI testing         |
+| Standard CLI + API (Week 2) | `Playwright_CLI/`    | Playwright UI + API testing — `request` fixture, testData, dual config |
 
 ---
 
@@ -31,11 +32,13 @@ The same VWO login page is tested three different ways intentionally. Each appro
 
 **AI-Assisted QA (MCP)** answers: "How can AI augment my workflow without replacing my judgment?" Playwright MCP + JIRA MCP lets Claude Desktop control a real browser and log bugs autonomously — but the SDET defines the STLC structure, reviews output, and makes decisions. This represents the emerging skill layer in 2025–26 hiring.
 
-**Standard CLI** answers: "How do I build a production-grade, maintainable automation framework from scratch?" This is what companies actually run in CI/CD pipelines. No AI assistance — pure engineering. The SDET writes every file, understands every decision, and owns the framework architecture.
+**Standard CLI (Week 1)** answers: "How do I build a production-grade, maintainable automation framework from scratch?" This is what companies actually run in CI/CD pipelines. No AI assistance — pure engineering. The SDET writes every file, understands every decision, and owns the framework architecture.
+
+**Standard CLI + API (Week 2)** expands the question: "How do I test across UI and API layers in a single cohesive framework?" By adding the `request` fixture and a second project config, this demonstrates the real-world SDET skill of choosing the right layer to test (API for speed, UI for user workflows). It introduces testData patterns, environment variables, and shows 14× speed gains by testing at API layer.
 
 ---
 
-## Project 3 — STLC Standard CLI
+## Project 1b — STLC Standard CLI (Week 1)
 
 ### What Standard CLI means and why an SDET chooses it
 
@@ -64,7 +67,7 @@ An SDET chooses Standard CLI over other approaches for four specific reasons:
 | Maintenance              | Manual re-execution | Re-run AI session             | Git commit — version controlled       |
 
 ### Project structure
-### Project structure
+
 ```
 STLC_Standard_CLI/
 │
@@ -135,6 +138,153 @@ npx playwright show-report
 **Target:** https://app.vwo.com/#/login
 **Type:** Web Application — Authentication Module
 **Purpose:** Practice STLC application — public login page used as test target
+
+---
+
+## Project 2 — Playwright_CLI: UI + API Testing (Week 2)
+
+### Overview
+
+**Standard Playwright UI + API Testing | VWO Login + ReqRes API**
+
+This project introduces API testing alongside UI automation — a critical real-world SDET skill. Using Playwright's `request` fixture, tests run directly against ReqRes public API with zero browser overhead, demonstrating the speed and value of testing at multiple layers.
+
+### Test Results
+
+| Suite                  | Tests     | Status             |
+| ---------------------- | --------- | ------------------ |
+| API — auth.spec.ts     | 5/5       | ✅ Passing         |
+| API — users.spec.ts    | 5/5       | ✅ Passing         |
+| UI — vwo_login.spec.ts | 10/10     | ✅ Passing         |
+| **Total**              | **20/20** | **✅ All passing** |
+
+### What this project adds
+
+- **Playwright `request` fixture** — API testing without browser or external tools
+- **Full CRUD coverage** — GET, POST, PUT, DELETE against ReqRes public API
+- **Dual project config** — `ui` and `api` projects in single `playwright.config.ts`
+- **testData.ts** — typed test data pattern using TypeScript interfaces
+- **dotenv + GitHub Secrets** — secure API key handling in CI/CD
+- **Edge case UI tests** — SQL injection, boundary strings, special characters, whitespace handling
+- **Bug KAN-2 logged** — REST 200 vs 201 discrepancy in ReqRes API documented
+
+### Performance Comparison
+
+| Layer          | Tests | Time    | Per-test                |
+| -------------- | ----- | ------- | ----------------------- |
+| API tests      | 10    | 3.9s    | ~400ms                  |
+| UI tests       | 10    | 53.9s   | 5-14s                   |
+| **Speed gain** | —     | **14×** | API layer is 13× faster |
+
+**Why this matters:** Product SDETs use this knowledge to make architectural decisions — which features test at API vs UI layer for optimal coverage and CI/CD speed.
+
+### Project structure
+
+```
+Playwright_CLI/
+│
+├── tests/
+│   ├── example.spec.ts              ← Template test
+│   ├── api/
+│   │   ├── auth.spec.ts             ← API auth scenarios
+│   │   ├── users.spec.ts            ← CRUD operations
+│   │   └── bug_kan2.spec.ts         ← REST discrepancy test
+│   └── ui/
+│       └── vwo_login.spec.ts        ← UI login scenarios + edge cases
+│
+├── pages/
+│   └── LoginPage.ts                 ← POM — VWO selectors
+│
+├── data/
+│   └── testData.ts                  ← Typed test data (interfaces)
+│
+├── docs/
+│   ├── 01_requirement_analysis.md    ← API + UI requirements
+│   ├── 02_test_planning.md           ← Scope, risks, dual-layer strategy
+│   ├── 03_test_cases.md              ← TC-01 through TC-20
+│   ├── 04_bug_reports.md             ← KAN-2 full detail
+│   └── 05_test_closure.md            ← Final validation
+│
+├── playwright.config.ts             ← baseURL, projects (ui/api), globals
+├── tsconfig.json                    ← TypeScript config
+├── package.json                     ← Playwright, dotenv dependencies
+└── README.md                        ← Project guide
+```
+
+### Key concepts introduced
+
+- **`page.request`** fixture — direct HTTP requests without browser context
+- **`extraHTTPHeaders`** — adding auth headers to all requests
+- **`baseURL` per project** — separate configs for UI and API
+- **TypeScript interfaces** — type-safe test data (Request/Response)
+- **`dotenv`** — loading `.env` for secrets in local dev
+- **GitHub Secrets** — CI/CD environment variable injection
+- **`if: always()`** in CI — report generation even if tests fail
+- **npm ci** — locked dependency install for reproducibility
+
+### STLC — All 6 Phases
+
+Full documentation in `Playwright_CLI/docs/`:
+
+| Phase                    | Deliverable                                     |
+| ------------------------ | ----------------------------------------------- |
+| 1 — Requirement Analysis | API endpoints + UI workflows documented         |
+| 2 — Test Planning        | Dual-layer strategy, scope, risk register       |
+| 3 — Test Case Design     | 20 test cases (10 API, 10 UI) with edge cases   |
+| 4 — Test Automation      | Playwright request + browser, POM, testData     |
+| 5 — Bug Reporting        | KAN-2 — REST 201 vs 200 status code discrepancy |
+| 6 — Test Closure         | 20/20 passing, cross-layer validated            |
+
+### Bug KAN-2
+
+**Issue:** POST /api/register returns `200 (OK)` instead of `201 (Created)`  
+**Impact:** Violates REST convention — clients expect 201 to signal resource creation  
+**Evidence:** Test case `POST_Register_ShouldReturn201OnSuccess` in bug_kan2.spec.ts  
+**Status:** Documented for ReqRes demonstration
+
+### How to run locally
+
+```bash
+cd Playwright_CLI
+
+# Install dependencies
+npm ci
+npx playwright install
+
+# Run all tests (UI + API)
+npx playwright test
+
+# Run only API tests
+npx playwright test --project=api
+
+# Run only UI tests
+npx playwright test --project=ui
+
+# View HTML report
+npx playwright show-report
+```
+
+---
+
+## Portfolio Progression
+
+| Week | Project                | Approach                                                | Tests | Status |
+| ---- | ---------------------- | ------------------------------------------------------- | ----- | ------ |
+| 0    | Block_A_Manual         | Manual STLC — no automation                             | —     | ✅     |
+| 1a   | STLC_MCP_Project       | Playwright MCP + JIRA MCP                               | 13    | ✅     |
+| 1b   | STLC_Standard_CLI      | Standard CLI, POM, 3 browsers (UI only)                 | 18    | ✅     |
+| 2    | Playwright_CLI         | UI + API, testData, dual config, performance comparison | 20    | ✅     |
+| 3/4  | AI_Agentic             | @playwright/cli AI-driven                               | TBD   | 🔄     |
+| —    | Selenium_to_Playwright | Migration from Selenium                                 | TBD   | 📋     |
+
+### What each project teaches
+
+- **Block_A_Manual:** STLC fundamentals — how to think like a tester before touching code
+- **STLC_MCP_Project:** AI integration — MCP architecture, autonomous test generation, JIRA automation
+- **STLC_Standard_CLI:** Core SDET engineering — POM patterns, CI/CD, cross-browser testing, Git workflow
+- **Playwright_CLI:** Advanced SDET patterns — API + UI layering, testData design, performance analysis, multi-config frameworks
+- **AI_Agentic:** Emerging 2025 skill — autonomous agents, prompt engineering, AI-driven test design
+- **Selenium_to_Playwright:** Framework migration — legacy system modernization, tool evaluation
 
 ---
 

@@ -4,3 +4,4 @@ test-results/
 .env
 *.log
 .claude/
+_learning_notes/
