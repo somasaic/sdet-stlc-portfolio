@@ -698,6 +698,10 @@
       <button class="concept-btn" onclick="showPanel('manual')">Manual vs MCP</button>
       <button class="concept-btn" onclick="showPanel('stlc')">STLC Phases</button>
       <button class="concept-btn" onclick="showPanel('repo')">The Repo</button>
+      <button class="concept-btn" onclick="showPanel('approaches')">4 Approaches vs</button>
+      <button class="concept-btn" onclick="showPanel('apitesting')">API Testing</button>
+      <button class="concept-btn" onclick="showPanel('fixtures')">page vs request</button>
+      <button class="concept-btn" onclick="showPanel('clicomp')">CLI Comparison</button>
     </div>
 
     <!-- MCP PANEL -->
@@ -1078,6 +1082,382 @@ PRD Read (Manual)<br>
         <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#a78bfa;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">⬡ GitHub Repo ↗</a>
         <a href="https://www.linkedin.com/in/somasaidinesh/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);color:#22d3ee;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">in LinkedIn ↗</a>
         <a href="https://somasaicheviti.atlassian.net/jira/software/projects/KAN/boards/1" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#f87171;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">🐛 KAN-1 JIRA ↗</a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════ NEW PANEL 1: 4 APPROACHES COMPARED ═══════════════════════ -->
+    <div class="concept-panel" id="panel-approaches">
+      <div class="panel-title">4 Approaches — Side by Side</div>
+      <div class="panel-subtitle">Same VWO login. Same 6 STLC phases. Completely different execution.</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 1</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Block_A_Manual</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>PRD read — 8 elements found</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Test cases hand-written</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Bug report in Word doc</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>~90 min total</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>No CI/CD pipeline</div>
+          <div style="margin-top:12px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Skill: QA process thinking</div>
+        </div>
+        <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 2</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">STLC_MCP_Project</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Live DOM — 43 elements</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>AI writes test cases</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>KAN-1 via JIRA MCP</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>~20 min · 4.5× faster</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>5-browser CI pipeline</div>
+          <div style="margin-top:12px;font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;">Skill: AI agent orchestration</div>
+        </div>
+        <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:12px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 3</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Standard CLI</div>
+          <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>POM — getByRole locators</div>
+          <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>18/18 — 3 browsers</div>
+          <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>codegen for selectors</div>
+          <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>GitHub Actions CI green</div>
+          <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>HTML report artifact</div>
+          <div style="margin-top:12px;font-size:11px;color:var(--accent2);font-family:'JetBrains Mono',monospace;">Skill: pure engineering</div>
+        </div>
+        <div style="background:rgba(52,211,153,0.06);border:2px solid rgba(52,211,153,0.3);border-radius:12px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 4 · LATEST</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Playwright CLI</div>
+          <div class="compare-item"><div class="dot dot-green"></div>UI + API in one project</div>
+          <div class="compare-item"><div class="dot dot-green"></div>request fixture — no browser</div>
+          <div class="compare-item"><div class="dot dot-green"></div>testData.ts — typed inputs</div>
+          <div class="compare-item"><div class="dot dot-green"></div>20/20 · 14× API speed</div>
+          <div class="compare-item"><div class="dot dot-green"></div>KAN-2 via JIRA MCP</div>
+          <div style="margin-top:12px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;">Skill: framework depth + API</div>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto;margin-bottom:20px;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'JetBrains Mono',monospace;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 12px;color:var(--muted);font-size:11px;">Dimension</td>
+            <td style="padding:10px 12px;color:var(--muted);text-align:center;">Manual</td>
+            <td style="padding:10px 12px;color:var(--accent3);text-align:center;">MCP</td>
+            <td style="padding:10px 12px;color:var(--accent2);text-align:center;">Standard CLI</td>
+            <td style="padding:10px 12px;color:var(--green);text-align:center;">Playwright CLI</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
+            <td style="padding:9px 12px;color:#b8b8d0;">Tool</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">None</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">Claude + MCP servers</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">npx playwright</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">npx playwright + request</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
+            <td style="padding:9px 12px;color:#b8b8d0;">Test types</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">None</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">UI</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">UI</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">UI + API</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
+            <td style="padding:9px 12px;color:#b8b8d0;">Speed</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">~90 min</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">~20 min</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">~90s CI run</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">3.9s API · 54s UI</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
+            <td style="padding:9px 12px;color:#b8b8d0;">Bugs logged</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">Word doc</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">KAN-1 via JIRA MCP</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">KAN-1 reference</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">KAN-2 via JIRA MCP</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 12px;color:#b8b8d0;">New skill added</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">Process</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">AI orchestration</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">POM + CI/CD</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">API testing + security edge cases</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>The key insight:</strong> The STLC phases never change — Requirement Analysis, Test Planning, Test Design, Execution, Bug Reporting, Closure. What changes is the <em>execution mode</em>. Manual tests your judgment. MCP tests your process. Standard CLI tests your engineering. Playwright CLI tests your framework depth. An SDET needs to operate fluently in all four.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════ NEW PANEL 2: API TESTING ═══════════════════════ -->
+    <div class="concept-panel" id="panel-apitesting">
+      <div class="panel-title">API Testing — From Zero to SDET Level</div>
+      <div class="panel-subtitle">What it is, why it matters, and how Playwright handles it natively</div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title">UI Test <span class="badge badge-old">browser required</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Playwright opens a real browser (Chromium)</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Loads app.vwo.com in that browser</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Finds DOM elements, clicks, fills</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Asserts on what the user sees</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>5 to 30 seconds per test</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Fragile to CSS/DOM changes</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">API Test <span class="badge badge-new">no browser at all</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>request fixture — direct HTTP to server</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>No browser launched, no page loaded</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Sends HTTP request, reads JSON response</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Asserts on status code + body + schema</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>200 to 500ms per test — 14× faster</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Stable — tests API contract not visuals</div>
+        </div>
+      </div>
+
+      <div style="margin:16px 0;background:var(--surface2);border-radius:12px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:12px;">THREE ASSERTION LEVELS — every API test needs all three</div>
+        <div class="compare-grid" style="margin:0;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:0 8px 8px 0;padding:12px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;">LEVEL 1 — Status Code (always)</div>
+              <div class="code-snip" style="margin:0;padding:10px;font-size:11px;"><span class="fn">expect</span>(response.<span class="fn">status</span>()).<span class="fn">toBe</span>(<span class="var">200</span>);</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);margin-bottom:6px;">LEVEL 2 — Body Fields (always)</div>
+              <div class="code-snip" style="margin:0;padding:10px;font-size:11px;"><span class="kw">const</span> <span class="var">body</span> = <span class="kw">await</span> response.<span class="fn">json</span>();<br><span class="fn">expect</span>(body.token).<span class="fn">toBeDefined</span>();</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:12px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);margin-bottom:6px;">LEVEL 3 — Schema / Types (2yr level)</div>
+              <div class="code-snip" style="margin:0;padding:10px;font-size:11px;"><span class="fn">expect</span>(<span class="kw">typeof</span> body.data.id).<span class="fn">toBe</span>(<span class="str">'number'</span>);<br><span class="fn">expect</span>(Array.<span class="fn">isArray</span>(body.data)).<span class="fn">toBe</span>(<span class="kw">true</span>);</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);margin-bottom:8px;">CRITICAL — 204 DELETE RULE</div>
+              <div style="font-size:12px;color:#b8b8d0;line-height:1.6;">204 No Content = no body. Never call <span style="color:var(--orange);font-family:'JetBrains Mono',monospace;">response.json()</span> on DELETE. It throws because the body is empty.</div>
+              <div class="code-snip" style="margin:8px 0 0;padding:10px;font-size:11px;"><span class="fn">expect</span>(response.<span class="fn">status</span>()).<span class="fn">toBe</span>(<span class="var">204</span>);<br><span class="cm">// do NOT call response.json() here</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);margin-bottom:8px;">STATUS CODE RANGES</div>
+              <div style="font-size:11px;color:#b8b8d0;line-height:1.8;font-family:'JetBrains Mono',monospace;">
+                <span style="color:var(--green);">2xx</span> — success (200 OK, 201 Created, 204 No Content)<br>
+                <span style="color:var(--orange);">4xx</span> — client error YOUR fault (400, 401, 403, 404)<br>
+                <span style="color:#f87171;">5xx</span> — server error THEIR fault (500, 502, 503)<br>
+                <span style="color:var(--muted);">404 as PASS</span> — negative tests assert 404 intentionally
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Why API testing is the market gap:</strong> 80% of SDET job descriptions ask for API testing. Most candidates with 1-2 years experience only have UI automation. The request fixture in Week 2 closes this gap entirely — same Playwright framework, same TypeScript, same CI pipeline. One project that proves both.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════ NEW PANEL 3: page vs request FIXTURE ═══════════════════════ -->
+    <div class="concept-panel" id="panel-fixtures">
+      <div class="panel-title">page fixture vs request fixture</div>
+      <div class="panel-subtitle">The most important Playwright distinction for SDET interviews</div>
+
+      <div class="arch-flow" style="justify-content:center;">
+        <div class="arch-node highlight-node">
+          <div class="arch-node-icon">🧪</div>
+          <div class="arch-node-label">test()</div>
+          <div class="arch-node-sub">Playwright runner</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">injects</div>
+        </div>
+        <div class="arch-node" style="border-color:var(--accent2);background:rgba(34,211,238,0.08);">
+          <div class="arch-node-icon">📄</div>
+          <div class="arch-node-label">{ page }</div>
+          <div class="arch-node-sub">browser opens</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">→ DOM</div>
+        </div>
+        <div class="arch-node server-node">
+          <div class="arch-node-icon">🌐</div>
+          <div class="arch-node-label">VWO Login</div>
+          <div class="arch-node-sub">~5-30s per test</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin:4px 0 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">— OR —</div>
+
+      <div class="arch-flow" style="justify-content:center;">
+        <div class="arch-node highlight-node">
+          <div class="arch-node-icon">🧪</div>
+          <div class="arch-node-label">test()</div>
+          <div class="arch-node-sub">Playwright runner</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">injects</div>
+        </div>
+        <div class="arch-node" style="border-color:var(--green);background:rgba(52,211,153,0.08);">
+          <div class="arch-node-icon">📡</div>
+          <div class="arch-node-label">{ request }</div>
+          <div class="arch-node-sub">NO browser at all</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-arrow-line"></div>
+          <div class="arch-arrow-label">HTTP direct</div>
+        </div>
+        <div class="arch-node server-node">
+          <div class="arch-node-icon">⚡</div>
+          <div class="arch-node-label">reqres.in API</div>
+          <div class="arch-node-sub">~200-500ms per test</div>
+        </div>
+      </div>
+
+      <div class="compare-grid" style="margin-top:20px;">
+        <div class="compare-col">
+          <div class="compare-col-title">{ page } fixture <span class="badge" style="background:rgba(34,211,238,0.1);color:var(--accent2);">UI layer</span></div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent2);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Opens real Chromium/Firefox/WebKit browser</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent2);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Navigates to URL, waits for DOM ready</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent2);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Interacts: fill(), click(), hover()</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent2);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Asserts: toBeVisible(), toHaveText()</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent2);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Slower — 5-30s · sensitive to UI changes</div>
+          <div class="code-snip" style="margin-top:12px;font-size:11px;padding:10px;">
+<span class="kw">test</span>(<span class="str">'login smoke'</span>, <span class="kw">async</span> ({ <span class="var">page</span> }) => {<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'/#/login'</span>);<br>
+&nbsp;&nbsp;<span class="kw">await</span> <span class="fn">expect</span>(emailInput).<span class="fn">toBeVisible</span>();<br>
+});
+          </div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">{ request } fixture <span class="badge badge-new">API layer</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>No browser. Zero. Nothing launched.</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Sends HTTP directly: GET POST PUT DELETE</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>request.get() · request.post({ data })</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Asserts: status() · json() · body fields</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>14× faster · stable · environment-agnostic</div>
+          <div class="code-snip" style="margin-top:12px;font-size:11px;padding:10px;">
+<span class="kw">test</span>(<span class="str">'login API'</span>, <span class="kw">async</span> ({ <span class="var">request</span> }) => {<br>
+&nbsp;&nbsp;<span class="kw">const</span> <span class="var">res</span> = <span class="kw">await</span> request.<span class="fn">post</span>(<span class="str">'/api/login'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{ data: apiData.validLogin });<br>
+&nbsp;&nbsp;<span class="fn">expect</span>(<span class="var">res</span>.<span class="fn">status</span>()).<span class="fn">toBe</span>(<span class="var">200</span>);<br>
+});
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;background:var(--surface2);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:10px;">testData.ts — why no hardcoded strings in tests</div>
+        <div class="code-snip" style="margin:0;font-size:11px;padding:12px;">
+<span class="cm">// Week 1 — hardcoded, fragile</span><br>
+<span class="kw">await</span> loginPage.<span class="fn">login</span>(<span class="str">'test@wingify.com'</span>, <span class="str">'wrongpass'</span>);<br><br>
+<span class="cm">// Week 2 — testData.ts, typed, DRY</span><br>
+<span class="kw">import</span> { apiData, uiData } <span class="kw">from</span> <span class="str">'../../data/testData'</span>;<br>
+<span class="kw">await</span> request.<span class="fn">post</span>(endpoints.login, { data: apiData.validLogin });<br>
+<span class="cm">// One file change updates every test that uses this credential</span>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;">
+        <strong>Interview answer:</strong> "page fixture opens a real browser and tests the DOM layer — what users see and interact with. request fixture makes direct HTTP calls with no browser — it tests the API contract: status codes, response schemas, and error handling. API tests run 14× faster. I use both in the same project because they test different layers of the same feature."
+      </div>
+    </div>
+
+    <!-- ═══════════════════════ NEW PANEL 4: CLI COMPARISON ═══════════════════════ -->
+    <div class="concept-panel" id="panel-clicomp">
+      <div class="panel-title">Three CLI Tools — npx playwright vs MCP vs @playwright/cli</div>
+      <div class="panel-subtitle">Playwright has three distinct execution modes — each serves a different purpose</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">TOOL 1 · STANDARD</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">npx playwright</div>
+          <div style="font-size:11px;color:var(--accent2);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">Ships with @playwright/test</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-muted"></div>Test runner — runs spec files</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-muted"></div>codegen — record interactions</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-muted"></div>show-report, show-trace</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-muted"></div>--grep --project --debug --ui</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>CI/CD focused, one-shot per run</div>
+          <div style="margin-top:14px;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;border-top:1px solid var(--border);padding-top:10px;">Used in: Week 1b + Week 2</div>
+        </div>
+
+        <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px;">TOOL 2 · AI AGENT</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">Playwright MCP</div>
+          <div style="font-size:11px;color:var(--accent3);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">@playwright/mcp — JSON-RPC over stdio</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-accent"></div>AI calls browser_snapshot, browser_click</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-accent"></div>Snapshots injected INTO context window</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-accent"></div>~115K tokens per 30 actions</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-accent"></div>Per-call browser lifetime</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Best for: live interactive exploration</div>
+          <div style="margin-top:14px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;border-top:1px solid rgba(99,102,241,0.2);padding-top:10px;">Used in: Week 1a (STLC_MCP_Project)</div>
+        </div>
+
+        <div style="background:rgba(52,211,153,0.06);border:2px solid rgba(52,211,153,0.3);border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">TOOL 3 · AI EFFICIENT · NEXT</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">@playwright/cli</div>
+          <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">Microsoft's new AI agent CLI</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-green"></div>playwright-cli open · snapshot · click</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-green"></div>Snapshots saved to DISK as YAML/PNG</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-green"></div>~25K tokens · 4.6× MCP savings</div>
+          <div class="compare-item" style="margin-bottom:5px;"><div class="dot dot-green"></div>Persistent daemon via Unix socket</div>
+          <div class="compare-item"><div class="dot dot-green"></div>Best for: complex multi-step AI automation</div>
+          <div style="margin-top:14px;font-size:10px;color:var(--green);font-family:'JetBrains Mono',monospace;border-top:1px solid rgba(52,211,153,0.2);padding-top:10px;">Planned: Week 3/4 AI_Agentic project</div>
+        </div>
+      </div>
+
+      <!-- Token comparison bar chart -->
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:14px;">TOKEN USAGE COMPARISON — per 30 actions</div>
+        <div class="metric-row">
+          <div class="metric-label" style="font-size:12px;color:#b8b8d0;">Playwright MCP</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar" style="width:100%;background:rgba(99,102,241,0.6);"></div>
+              <div class="metric-val">~115,000 tokens (context window)</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-label" style="font-size:12px;color:#b8b8d0;">@playwright/cli</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar" style="width:22%;background:linear-gradient(90deg,var(--green),#22d3ee);"></div>
+              <div class="metric-val" style="color:var(--green);">~25,000 tokens (disk snapshots) · 4.6× saving</div>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row" style="margin-bottom:0;">
+          <div class="metric-label" style="font-size:12px;color:#b8b8d0;">npx playwright</div>
+          <div class="metric-bars">
+            <div class="metric-bar-wrap">
+              <div class="metric-bar" style="width:3%;background:var(--muted);"></div>
+              <div class="metric-val">0 tokens — traditional test runner, no LLM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title" style="font-size:13px;">Why MCP burns tokens</div>
+          <div style="font-size:13px;color:#b8b8d0;line-height:1.6;">Every browser_snapshot call injects the full page accessibility tree directly into the LLM context window. After 15+ steps, the context carries 90K+ tokens of stale snapshots from pages the agent already left. The model loses track of what is current.</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title" style="font-size:13px;">Why @playwright/cli solves it</div>
+          <div style="font-size:13px;color:#b8b8d0;line-height:1.6;">Snapshots write to disk as YAML/PNG files. The context window never sees them unless the agent explicitly reads a specific file. The model only loads what it needs right now. Persistent Unix socket sessions mean the browser stays alive between commands — no re-launch overhead.</div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;">
+        <strong>The progression logic:</strong> Standard CLI (Week 1b) → MCP (Week 1a) → @playwright/cli (Week 3/4). Each mode has a clear use case. Real SDET teams use all three depending on context: standard CLI for CI/CD, MCP for interactive exploration, @playwright/cli for AI agent automation at scale.
+      </div>
+
+      <div class="code-snip">
+<span class="cm"># @playwright/cli — AI agent commands</span><br>
+playwright-cli <span class="fn">open</span> https://app.vwo.com/<span class="var">#</span>/login<br>
+playwright-cli <span class="fn">snapshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># writes YAML to disk, NOT context window</span><br>
+playwright-cli <span class="fn">click</span> e15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># element ref from snapshot</span><br>
+playwright-cli <span class="fn">fill</span> e22 <span class="str">"test@wingify.com"</span><br>
+playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># saves PNG to disk</span><br><br>
+<span class="cm"># Token cost: ~25K vs ~115K for MCP — same task, 4.6× cheaper</span>
       </div>
     </div>
 
