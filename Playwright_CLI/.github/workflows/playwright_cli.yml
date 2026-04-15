@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 60
 
     env:
-      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY || '' }}
 
     steps:
       - name: Checkout repository
