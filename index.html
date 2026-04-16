@@ -698,10 +698,15 @@
       <button class="concept-btn" onclick="showPanel('manual')">Manual vs MCP</button>
       <button class="concept-btn" onclick="showPanel('stlc')">STLC Phases</button>
       <button class="concept-btn" onclick="showPanel('repo')">The Repo</button>
-      <button class="concept-btn" onclick="showPanel('approaches')">4 Approaches vs</button>
+      <button class="concept-btn" onclick="showPanel('approaches')">5 Approaches vs</button>
       <button class="concept-btn" onclick="showPanel('apitesting')">API Testing</button>
       <button class="concept-btn" onclick="showPanel('fixtures')">page vs request</button>
       <button class="concept-btn" onclick="showPanel('clicomp')">CLI Comparison</button>
+      <button class="concept-btn" onclick="showPanel('llmlimits')">LLM Limits</button>
+      <button class="concept-btn" onclick="showPanel('agentarch')">Agent Architecture</button>
+      <button class="concept-btn" onclick="showPanel('pwagents')">Playwright Agents</button>
+      <button class="concept-btn" onclick="showPanel('agentsvsmcp')">Agents vs MCP</button>
+      <button class="concept-btn" onclick="showPanel('visualreg')">Visual Regression</button>
     </div>
 
     <!-- MCP PANEL -->
@@ -1087,49 +1092,60 @@ PRD Read (Manual)<br>
 
     <!-- ═══════════════════════ NEW PANEL 1: 4 APPROACHES COMPARED ═══════════════════════ -->
     <div class="concept-panel" id="panel-approaches">
-      <div class="panel-title">4 Approaches — Side by Side</div>
-      <div class="panel-subtitle">Same VWO login. Same 6 STLC phases. Completely different execution.</div>
+      <div class="panel-title">5 Approaches — Side by Side</div>
+      <div class="panel-subtitle">Same VWO login. Same 6 STLC phases. Completely different execution. Each approach adds a skill the previous couldn't demonstrate.</div>
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 1</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Block_A_Manual</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Block_A_Manual</div>
           <div class="compare-item"><div class="dot dot-muted"></div>PRD read — 8 elements found</div>
           <div class="compare-item"><div class="dot dot-muted"></div>Test cases hand-written</div>
           <div class="compare-item"><div class="dot dot-muted"></div>Bug report in Word doc</div>
           <div class="compare-item"><div class="dot dot-muted"></div>~90 min total</div>
           <div class="compare-item"><div class="dot dot-muted"></div>No CI/CD pipeline</div>
-          <div style="margin-top:12px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Skill: QA process thinking</div>
+          <div style="margin-top:12px;font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Skill: QA process thinking</div>
         </div>
-        <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:16px;">
+        <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:14px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 2</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">STLC_MCP_Project</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">STLC_MCP_Project</div>
           <div class="compare-item"><div class="dot dot-accent"></div>Live DOM — 43 elements</div>
           <div class="compare-item"><div class="dot dot-accent"></div>AI writes test cases</div>
           <div class="compare-item"><div class="dot dot-accent"></div>KAN-1 via JIRA MCP</div>
           <div class="compare-item"><div class="dot dot-accent"></div>~20 min · 4.5× faster</div>
           <div class="compare-item"><div class="dot dot-accent"></div>5-browser CI pipeline</div>
-          <div style="margin-top:12px;font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;">Skill: AI agent orchestration</div>
+          <div style="margin-top:12px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;">Skill: AI agent orchestration</div>
         </div>
-        <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:12px;padding:16px;">
+        <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:12px;padding:14px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 3</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Standard CLI</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Standard CLI</div>
           <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>POM — getByRole locators</div>
           <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>18/18 — 3 browsers</div>
           <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>codegen for selectors</div>
           <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>GitHub Actions CI green</div>
           <div class="compare-item"><div class="dot dot-green" style="background:var(--accent2)"></div>HTML report artifact</div>
-          <div style="margin-top:12px;font-size:11px;color:var(--accent2);font-family:'JetBrains Mono',monospace;">Skill: pure engineering</div>
+          <div style="margin-top:12px;font-size:10px;color:var(--accent2);font-family:'JetBrains Mono',monospace;">Skill: pure engineering</div>
         </div>
-        <div style="background:rgba(52,211,153,0.06);border:2px solid rgba(52,211,153,0.3);border-radius:12px;padding:16px;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 4 · LATEST</div>
-          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;">Playwright CLI</div>
+        <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:14px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 4</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Playwright CLI</div>
           <div class="compare-item"><div class="dot dot-green"></div>UI + API in one project</div>
           <div class="compare-item"><div class="dot dot-green"></div>request fixture — no browser</div>
           <div class="compare-item"><div class="dot dot-green"></div>testData.ts — typed inputs</div>
           <div class="compare-item"><div class="dot dot-green"></div>20/20 · 14× API speed</div>
           <div class="compare-item"><div class="dot dot-green"></div>KAN-2 via JIRA MCP</div>
-          <div style="margin-top:12px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;">Skill: framework depth + API</div>
+          <div style="margin-top:12px;font-size:10px;color:var(--green);font-family:'JetBrains Mono',monospace;">Skill: framework depth + API</div>
+        </div>
+        <div style="background:rgba(167,139,250,0.08);border:2px solid rgba(167,139,250,0.4);border-radius:12px;padding:14px;position:relative;">
+          <div style="position:absolute;top:-10px;right:10px;background:var(--accent3);color:#1a0a2e;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:0.05em;">LATEST</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent3);letter-spacing:0.1em;margin-bottom:8px;">APPROACH 5</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">AI Agents</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent3);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Planner → Generator → Healer</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent3);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>AI plans + writes tests</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent3);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>Self-healing on failure</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent3);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>3/3 visual regression</div>
+          <div class="compare-item"><div class="dot" style="background:var(--accent3);width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;"></div>seed.spec.ts bootstrap</div>
+          <div style="margin-top:12px;font-size:10px;color:var(--accent3);font-family:'JetBrains Mono',monospace;">Skill: autonomous AI testing</div>
         </div>
       </div>
 
@@ -1141,6 +1157,7 @@ PRD Read (Manual)<br>
             <td style="padding:10px 12px;color:var(--accent3);text-align:center;">MCP</td>
             <td style="padding:10px 12px;color:var(--accent2);text-align:center;">Standard CLI</td>
             <td style="padding:10px 12px;color:var(--green);text-align:center;">Playwright CLI</td>
+            <td style="padding:10px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.06);">AI Agents</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
             <td style="padding:9px 12px;color:#b8b8d0;">Tool</td>
@@ -1148,6 +1165,7 @@ PRD Read (Manual)<br>
             <td style="padding:9px 12px;color:var(--accent3);text-align:center;">Claude + MCP servers</td>
             <td style="padding:9px 12px;color:var(--accent2);text-align:center;">npx playwright</td>
             <td style="padding:9px 12px;color:var(--green);text-align:center;">npx playwright + request</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">planner + generator + healer</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
             <td style="padding:9px 12px;color:#b8b8d0;">Test types</td>
@@ -1155,6 +1173,7 @@ PRD Read (Manual)<br>
             <td style="padding:9px 12px;color:var(--accent3);text-align:center;">UI</td>
             <td style="padding:9px 12px;color:var(--accent2);text-align:center;">UI</td>
             <td style="padding:9px 12px;color:var(--green);text-align:center;">UI + API</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">UI + Visual Regression</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
             <td style="padding:9px 12px;color:#b8b8d0;">Speed</td>
@@ -1162,6 +1181,7 @@ PRD Read (Manual)<br>
             <td style="padding:9px 12px;color:var(--accent3);text-align:center;">~20 min</td>
             <td style="padding:9px 12px;color:var(--accent2);text-align:center;">~90s CI run</td>
             <td style="padding:9px 12px;color:var(--green);text-align:center;">3.9s API · 54s UI</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">48s visual · auto-generated</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
             <td style="padding:9px 12px;color:#b8b8d0;">Bugs logged</td>
@@ -1169,19 +1189,29 @@ PRD Read (Manual)<br>
             <td style="padding:9px 12px;color:var(--accent3);text-align:center;">KAN-1 via JIRA MCP</td>
             <td style="padding:9px 12px;color:var(--accent2);text-align:center;">KAN-1 reference</td>
             <td style="padding:9px 12px;color:var(--green);text-align:center;">KAN-2 via JIRA MCP</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">KAN-3 healer-caught</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(42,42,58,0.5);">
+            <td style="padding:9px 12px;color:#b8b8d0;">Who writes tests</td>
+            <td style="padding:9px 12px;color:var(--muted);text-align:center;">You (manually)</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;">You (with AI assist)</td>
+            <td style="padding:9px 12px;color:var(--accent2);text-align:center;">You (pure code)</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">You (framework)</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">AI agents (autonomous)</td>
           </tr>
           <tr>
             <td style="padding:9px 12px;color:#b8b8d0;">New skill added</td>
             <td style="padding:9px 12px;color:var(--muted);text-align:center;">Process</td>
             <td style="padding:9px 12px;color:var(--accent3);text-align:center;">AI orchestration</td>
             <td style="padding:9px 12px;color:var(--accent2);text-align:center;">POM + CI/CD</td>
-            <td style="padding:9px 12px;color:var(--green);text-align:center;">API testing + security edge cases</td>
+            <td style="padding:9px 12px;color:var(--green);text-align:center;">API testing + edge cases</td>
+            <td style="padding:9px 12px;color:var(--accent3);text-align:center;background:rgba(167,139,250,0.04);">Autonomous gen + visual reg</td>
           </tr>
         </table>
       </div>
 
       <div class="callout">
-        <strong>The key insight:</strong> The STLC phases never change — Requirement Analysis, Test Planning, Test Design, Execution, Bug Reporting, Closure. What changes is the <em>execution mode</em>. Manual tests your judgment. MCP tests your process. Standard CLI tests your engineering. Playwright CLI tests your framework depth. An SDET needs to operate fluently in all four.
+        <strong>The key insight:</strong> The STLC phases never change — Requirement Analysis, Test Planning, Test Design, Execution, Bug Reporting, Closure. What changes is the <em>execution mode</em>. Manual tests your judgment. MCP tests your process. Standard CLI tests your engineering. Playwright CLI tests your framework depth. AI Agents tests whether you can let the AI work and know when to intervene. An SDET needs to operate fluently in all five.
       </div>
     </div>
 
@@ -1461,6 +1491,358 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
       </div>
     </div>
 
+    <!-- ══════════════ PANEL: LLM FEATURES & LIMITATIONS ══════════════ -->
+    <div class="concept-panel" id="panel-llmlimits">
+      <div class="panel-title">LLM — What It Can and Cannot Do</div>
+      <div class="panel-subtitle">Understanding the boundaries is what separates an SDET from someone who just prompts</div>
+
+      <div class="compare-grid">
+        <div class="compare-col highlight">
+          <div class="compare-col-title">What LLMs do well <span class="badge badge-new">text in → text out</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Understand natural language instructions precisely</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Generate code, test cases, docs from a description</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Reason about text — compare, summarise, classify</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Pattern-match from billions of training examples</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Produce structured output (JSON, Markdown, TypeScript)</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Chain reasoning steps — think before answering</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-title">Hard limitations <span class="badge badge-old">without tools</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">No memory</strong> — every conversation starts blank. No state between sessions.</div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">No tools</strong> — cannot open a browser, read a file, call an API by itself</div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">No real-time data</strong> — knowledge has a cutoff date, cannot fetch live DOM</div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">No execution</strong> — can write code but cannot run it and see the output</div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">No persistence</strong> — cannot save files, write to disk, modify state</div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">Context limit</strong> — finite window. Too much input = early content dropped</div>
+        </div>
+      </div>
+
+      <div style="margin:16px 0;background:var(--surface2);border-radius:12px;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:12px;">THE MEMORY PROBLEM — WHY IT MATTERS IN TESTING</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:0 8px 8px 0;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;">No short-term memory</div>
+            <div style="font-size:11px;color:#b8b8d0;line-height:1.6;">Within one session the LLM sees everything in the context window. But it cannot "remember" what it clicked 10 steps ago unless that snapshot is still in context.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);margin-bottom:6px;">No long-term memory</div>
+            <div style="font-size:11px;color:#b8b8d0;line-height:1.6;">Close the session, start again — zero memory. The LLM has no idea it already explored VWO login yesterday. Every run starts from scratch.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);margin-bottom:6px;">Solution: external memory</div>
+            <div style="font-size:11px;color:#b8b8d0;line-height:1.6;">Agents compensate by writing to disk — specs/, snapshots, test files. The filesystem becomes the LLM's long-term memory. This is exactly what the planner does.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Why this matters for SDET work:</strong> An LLM alone is a text transformer. It can describe a test — it cannot run one, verify a selector exists, or confirm a button is actually clickable. The moment you add tools (MCP, browser control, file I/O), you convert the LLM from a text generator into an agent that acts on the real world. That gap between "generating test ideas" and "generating verified, runnable tests" is exactly what Playwright AI Agents bridge.
+      </div>
+    </div>
+
+    <!-- ══════════════ PANEL: AGENT ARCHITECTURE ══════════════ -->
+    <div class="concept-panel" id="panel-agentarch">
+      <div class="panel-title">AI Agent Architecture — Think, Act, Observe</div>
+      <div class="panel-subtitle">What makes something an agent rather than just an LLM call</div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
+        <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.3);border-radius:12px;padding:18px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🧠</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;">LLM (Brain)</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Receives the prompt + tool results. Reasons about what to do next. Decides which tool to call and with what arguments. Produces the plan or code output.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent3);">Claude Sonnet / GPT-4</div>
+        </div>
+        <div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.25);border-radius:12px;padding:18px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🔧</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;">Tools (Hands)</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Browser control, file read/write, API calls, terminal commands. Tools are the only way the LLM can affect the outside world. Without tools it can only produce text.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);">MCP servers, browser_*, file I/O</div>
+        </div>
+        <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:18px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">💾</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;">Memory (State)</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Context window (short-term) + file system (long-term). The agent writes its discoveries to disk so later steps can read them. Specs, screenshots, test files are all memory.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);">specs/, tests/, snapshots/</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:14px;">THE AGENT LOOP — THINK → ACT → OBSERVE → REPEAT</div>
+        <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:8px;">
+          <div style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:10px;padding:12px 16px;min-width:120px;text-align:center;flex-shrink:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent3);margin-bottom:4px;">STEP 1</div>
+            <div style="font-size:12px;color:#fff;font-weight:600;">Think</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">LLM reads prompt + context, decides next action</div>
+          </div>
+          <div style="padding:0 8px;flex-shrink:0;color:var(--accent2);font-size:18px;">→</div>
+          <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);border-radius:10px;padding:12px 16px;min-width:120px;text-align:center;flex-shrink:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);margin-bottom:4px;">STEP 2</div>
+            <div style="font-size:12px;color:#fff;font-weight:600;">Call Tool</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">browser_snapshot(), browser_click(), write_file()</div>
+          </div>
+          <div style="padding:0 8px;flex-shrink:0;color:var(--accent2);font-size:18px;">→</div>
+          <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:12px 16px;min-width:120px;text-align:center;flex-shrink:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px;">STEP 3</div>
+            <div style="font-size:12px;color:#fff;font-weight:600;">Observe</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">Tool result injected into context. LLM reads it.</div>
+          </div>
+          <div style="padding:0 8px;flex-shrink:0;color:var(--accent2);font-size:18px;">→</div>
+          <div style="background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;padding:12px 16px;min-width:120px;text-align:center;flex-shrink:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--orange);margin-bottom:4px;">STEP 4</div>
+            <div style="font-size:12px;color:#fff;font-weight:600;">Decide</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">Done? → Output. Not done? → back to Step 1.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-title" style="font-size:13px;">Not an agent — single call</div>
+          <div class="code-snip" style="margin:0;padding:10px;font-size:11px;">
+<span class="cm">// Ask Claude to write a test — one shot</span><br>
+<span class="str">"Write a Playwright test for VWO login"</span><br>
+<span class="cm">// → Claude produces text. Done.</span><br>
+<span class="cm">// No browser opened, no selector verified,</span><br>
+<span class="cm">// no guarantee it actually works.</span>
+          </div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title" style="font-size:13px;">Agent — tool loop</div>
+          <div class="code-snip" style="margin:0;padding:10px;font-size:11px;">
+<span class="cm">// Planner agent loop</span><br>
+<span class="fn">planner_setup_page</span>() <span class="cm">→ runs seed.spec.ts</span><br>
+<span class="fn">browser_snapshot</span>() <span class="cm">→ reads live DOM</span><br>
+<span class="fn">browser_click</span>(<span class="str">"Forgot Password"</span>)<br>
+<span class="fn">browser_snapshot</span>() <span class="cm">→ reads new state</span><br>
+<span class="fn">write_file</span>(<span class="str">"specs/plan.md"</span>, plan)<br>
+<span class="cm">// Verified against real page. Saved to disk.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;">
+        <strong>The formula:</strong> Agent = LLM + Tools + Memory + Loop. Remove any one of the four and you no longer have an agent — you have a text generator. The Playwright AI Agents (planner, generator, healer) implement all four: Claude is the LLM, MCP tools are the hands, specs/ and tests/ are the memory, and the planner → generator → healer sequence is the loop.
+      </div>
+    </div>
+
+    <!-- ══════════════ PANEL: PLAYWRIGHT AI AGENTS ══════════════ -->
+    <div class="concept-panel" id="panel-pwagents">
+      <div class="panel-title">Playwright AI Agents — Planner, Generator, Healer</div>
+      <div class="panel-subtitle">Microsoft's built-in agent system for autonomous test creation and self-healing</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+        <div style="background:rgba(83,74,183,0.1);border:2px solid #534AB7;border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#AFA9EC;letter-spacing:0.1em;margin-bottom:8px;">AGENT 1 — PLANNER</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Explores → Plans</div>
+          <div class="compare-item"><div class="dot" style="background:#AFA9EC;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Calls <span style="color:#AFA9EC;font-family:'JetBrains Mono',monospace;font-size:10px;">planner_setup_page</span> → runs seed.spec.ts</div>
+          <div class="compare-item"><div class="dot" style="background:#AFA9EC;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>browser_snapshot → reads live DOM structure</div>
+          <div class="compare-item"><div class="dot" style="background:#AFA9EC;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Navigates all flows — login, errors, edge states</div>
+          <div class="compare-item"><div class="dot" style="background:#AFA9EC;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Writes human-readable Markdown test plan</div>
+          <div style="margin-top:12px;background:rgba(83,74,183,0.15);border-radius:6px;padding:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#AFA9EC;">
+            Input: seed.spec.ts + your prompt<br>
+            Output: specs/vwo_login_plan.md
+          </div>
+        </div>
+        <div style="background:rgba(15,110,86,0.1);border:2px solid #0F6E56;border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#5DCAA5;letter-spacing:0.1em;margin-bottom:8px;">AGENT 2 — GENERATOR</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Plan → Code</div>
+          <div class="compare-item"><div class="dot" style="background:#5DCAA5;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Reads specs/vwo_login_plan.md</div>
+          <div class="compare-item"><div class="dot" style="background:#5DCAA5;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Calls <span style="color:#5DCAA5;font-family:'JetBrains Mono',monospace;font-size:10px;">generator_setup_page</span> → opens browser</div>
+          <div class="compare-item"><div class="dot" style="background:#5DCAA5;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Verifies every selector live before writing</div>
+          <div class="compare-item"><div class="dot" style="background:#5DCAA5;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Writes TypeScript spec files with assertions</div>
+          <div style="margin-top:12px;background:rgba(15,110,86,0.15);border-radius:6px;padding:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#5DCAA5;">
+            Input: specs/vwo_login_plan.md<br>
+            Output: tests/login/*.spec.ts
+          </div>
+        </div>
+        <div style="background:rgba(133,79,11,0.1);border:2px solid #854F0B;border-radius:12px;padding:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#FAC775;letter-spacing:0.1em;margin-bottom:8px;">AGENT 3 — HEALER</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Fails → Fixes</div>
+          <div class="compare-item"><div class="dot" style="background:#FAC775;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Receives failing test name + error output</div>
+          <div class="compare-item"><div class="dot" style="background:#FAC775;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Replays failing steps in live browser</div>
+          <div class="compare-item"><div class="dot" style="background:#FAC775;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Inspects current DOM — finds correct selector</div>
+          <div class="compare-item"><div class="dot" style="background:#FAC775;width:5px;height:5px;border-radius:50%;margin-top:4px;flex-shrink:0"></div>Patches the spec file and re-runs until green</div>
+          <div style="margin-top:12px;background:rgba(133,79,11,0.15);border-radius:6px;padding:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#FAC775;">
+            Input: failing test + error message<br>
+            Output: patched passing spec file
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:12px;">THE SEED FILE — MOST MISUNDERSTOOD CONCEPT</div>
+        <div class="compare-grid" style="margin:0;">
+          <div class="compare-col">
+            <div style="font-size:12px;color:#b8b8d0;line-height:1.7;margin-bottom:10px;"><strong style="color:#fff;">seed.spec.ts is NOT a test</strong> — it is a browser bootstrap. Before the planner or generator starts exploring, it calls <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:11px;">planner_setup_page</span> which runs seed.spec.ts first. This opens a browser, navigates to the target URL, and then calls <span style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:11px;">page.pause()</span> — handing the live browser session to the agent.</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6;">Without <span style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:11px;">page.pause()</span>, the browser closes as soon as the test ends. The agent has nothing to explore. The pause keeps the session alive and transfers control.</div>
+          </div>
+          <div class="compare-col highlight">
+            <div class="code-snip" style="margin:0;padding:12px;font-size:11px;">
+<span class="cm">// seed.spec.ts — the handshake</span><br>
+<span class="kw">test</span>(<span class="str">'seed'</span>, <span class="kw">async</span> ({ <span class="var">page</span> }) => {<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'/#/login'</span>);<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">waitForLoadState</span>(<span class="str">'networkidle'</span>);<br><br>
+&nbsp;&nbsp;<span class="cm">// confirm page is ready</span><br>
+&nbsp;&nbsp;<span class="kw">await</span> <span class="fn">expect</span>(emailInput).<span class="fn">toBeVisible</span>();<br><br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">pause</span>();<br>
+&nbsp;&nbsp;<span class="cm">// ↑ agent takes control here</span><br>
+&nbsp;&nbsp;<span class="cm">// browser stays open</span><br>
+&nbsp;&nbsp;<span class="cm">// agent starts exploring</span><br>
+});
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Why init-agents?</strong> Running <span style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:12px;">npx playwright init-agents --loop=claude</span> writes three Markdown files into <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:12px;">.claude/agents/</span>. These are agent definition files — they contain the system prompts and tool lists that tell Claude Code how to behave as a planner, generator, or healer. Claude Code reads them automatically when you open the project. You never edit them — regenerate when Playwright is updated.
+      </div>
+    </div>
+
+    <!-- ══════════════ PANEL: AGENTS vs MCP — THE CRITICAL DISTINCTION ══════════════ -->
+    <div class="concept-panel" id="panel-agentsvsmcp">
+      <div class="panel-title">Playwright Agents vs Playwright MCP — Why They Are Different</div>
+      <div class="panel-subtitle">Both use MCP under the hood — but they solve completely different problems</div>
+
+      <div class="compare-grid" style="margin-bottom:20px;">
+        <div class="compare-col">
+          <div class="compare-col-title">Playwright MCP <span class="badge badge-old">Week 1a — exploration</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div><strong style="color:#fff">Purpose:</strong> Let an AI agent explore a live app interactively</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>YOU give a natural language instruction per step</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Claude Desktop calls browser_snapshot, browser_click</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Snapshot injected into context window each call</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Output: you read the response and decide next step</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>~115K tokens per 30 actions — context fills fast</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>No structured output — conversational, ad hoc</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Used for: Phase 1 requirement extraction, JIRA tickets</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">Playwright AI Agents <span class="badge badge-new">Week 3/4 — autonomous</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div><strong style="color:#fff">Purpose:</strong> Autonomously plan, generate, and heal tests</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>YOU give ONE high-level prompt — agent decides all steps</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Agent orchestrates planner_setup_page + browser tools</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Agent loop: Think → Tool call → Observe → Repeat</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Output: structured files — specs/*.md + tests/*.spec.ts</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Agent definitions in .claude/agents/ guide behaviour</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Deterministic — same input → same structured output</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Used for: all 6 STLC phases, fully automated</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:12px;">THEY BOTH USE MCP — SO WHAT'S DIFFERENT?</div>
+        <div style="font-size:13px;color:#b8b8d0;line-height:1.8;">
+          Playwright MCP is a <strong style="color:#fff">server</strong> — it exposes browser control tools (browser_snapshot, browser_click, browser_fill) via the MCP protocol. Any MCP client can use it.<br><br>
+          Playwright AI Agents are <strong style="color:#fff">clients</strong> with structured roles. The planner agent calls <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:11px;">planner_setup_page</span> which internally uses the same MCP browser tools — but wraps them in a deliberate loop with a defined output format (Markdown plan). The generator similarly uses <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:11px;">generator_setup_page</span> to produce TypeScript files.<br><br>
+          <strong style="color:var(--green);">Analogy:</strong> MCP is electricity. The agents are appliances. The planner is a camera that uses electricity to take a structured photo. The generator is a printer that uses electricity to produce a document. Both use the same power source — but they do completely different jobs.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:6px;">MCP alone</div>
+          <div style="font-size:12px;color:#b8b8d0;line-height:1.6;">Interactive, conversational. You drive every step. Flexible but manual. Good for exploration and one-off tasks.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid rgba(99,102,241,0.3);border-radius:10px;padding:14px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent3);margin-bottom:6px;">Agents using MCP</div>
+          <div style="font-size:12px;color:#b8b8d0;line-height:1.6;">Autonomous, structured. Agent drives all steps. Consistent output format. Good for repeatable workflows like STLC.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:14px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">Both together</div>
+          <div style="font-size:12px;color:#b8b8d0;line-height:1.6;">Use MCP for interactive exploration (Week 1a), then agents for systematic generation (Week 3/4). Different phases of the same STLC.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>The interview answer:</strong> "Playwright MCP is a browser control server — it exposes tools any AI can call. Playwright AI Agents are structured workflows built on top of MCP. The planner agent uses MCP browser tools internally but wraps them in a deliberate loop that produces a Markdown test plan. The generator converts that plan into verified TypeScript tests by checking every selector live. The healer uses the same tools to replay failures and patch broken locators. They are not alternatives — they are layers. MCP is the infrastructure. Agents are the application built on it."
+      </div>
+    </div>
+
+    <!-- ══════════════ PANEL: VISUAL REGRESSION DEEP DIVE ══════════════ -->
+    <div class="concept-panel" id="panel-visualreg">
+      <div class="panel-title">Visual Regression Testing — toHaveScreenshot()</div>
+      <div class="panel-subtitle">The Week 3/4 key addon — pixel-level UI verification that no previous approach covers</div>
+
+      <div class="compare-grid" style="margin-bottom:20px;">
+        <div class="compare-col">
+          <div class="compare-col-title">Functional test <span class="badge badge-old">what it can't catch</span></div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Login button text changed from "Sign in" to "Log in"</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Error message colour changed from red to orange</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Input field border disappeared in a CSS deploy</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>Password field moved 20px to the right on mobile</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>VWO logo replaced with placeholder image</div>
+          <div class="compare-item"><div class="dot dot-muted"></div>All functional tests still PASS despite these issues</div>
+        </div>
+        <div class="compare-col highlight">
+          <div class="compare-col-title">Visual regression <span class="badge badge-new">what it catches</span></div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Pixel-level diff — any visual change triggers failure</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Baseline PNG stored in repo — version controlled</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Diff image shows exactly what changed in red</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Runs in CI on every push — catches regressions before merge</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>Clips to stable elements — excludes dynamic backgrounds</div>
+          <div class="compare-item"><div class="dot dot-accent"></div>OS + browser tagged — chromium-win32.png, chromium-linux.png</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-bottom:12px;">TWO PHASES — HOW toHaveScreenshot() WORKS</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--card);border:1px solid rgba(52,211,153,0.25);border-top:3px solid var(--green);border-radius:0 0 8px 8px;padding:14px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);margin-bottom:8px;">PHASE 1 — BASELINE CREATION (first run)</div>
+            <div style="font-size:12px;color:#b8b8d0;line-height:1.7;">No PNG exists yet. Playwright takes a screenshot and saves it to <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:10px;">tests/visual/login_visual.spec.ts-snapshots/</span>. Test "fails" with message "snapshot doesn't exist, writing actual". This is correct — run <span style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;">--update-snapshots</span> to promote to baseline.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid rgba(99,102,241,0.25);border-top:3px solid var(--accent);border-radius:0 0 8px 8px;padding:14px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);margin-bottom:8px;">PHASE 2 — COMPARISON (every run after)</div>
+            <div style="font-size:12px;color:#b8b8d0;line-height:1.7;">Baseline exists. Playwright takes a new screenshot and compares pixel by pixel against the stored PNG. If difference exceeds <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:10px;">maxDiffPixels: 200</span>, test FAILS with a diff image showing changed pixels highlighted in red/pink.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:0.08em;margin-bottom:12px;">THE VWO ANIMATED BACKGROUND PROBLEM — AND HOW WE SOLVED IT</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--card);border:1px solid rgba(251,146,60,0.2);border-radius:8px;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--orange);margin-bottom:6px;">THE PROBLEM</div>
+            <div style="font-size:11px;color:#b8b8d0;line-height:1.6;">VWO login has a CSS animated background that changes every render. Full-page screenshots showed 65,000–69,000 pixel diffs between runs taken seconds apart — not because the UI changed, but because the background animation was at a different frame.</div>
+          </div>
+          <div style="background:var(--card);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">THE FIX — clip to form bounding box</div>
+            <div class="code-snip" style="margin:0;padding:8px;font-size:10px;">
+<span class="kw">const</span> <span class="var">form</span> = page.<span class="fn">locator</span>(<span class="str">'form'</span>).<span class="fn">first</span>();<br>
+<span class="kw">const</span> <span class="var">box</span> = <span class="kw">await</span> form.<span class="fn">boundingBox</span>();<br>
+<span class="kw">await</span> <span class="fn">expect</span>(page).<span class="fn">toHaveScreenshot</span>({<br>
+&nbsp;&nbsp;clip: box ?? undefined,<br>
+&nbsp;&nbsp;maxDiffPixels: <span class="var">200</span>,<br>
+});
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6;">Result: only the login form is captured. The animated background is outside the clip rectangle — it never appears. 3/3 tests now pass stably across runs. This is documented engineering decision-making — not just "it works now."</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">TC-VR-01</div>
+          <div style="font-size:11px;color:#b8b8d0;margin-bottom:4px;">Default login state</div>
+          <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;">vwo-login-default-chromium-win32.png</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">TC-VR-02</div>
+          <div style="font-size:11px;color:#b8b8d0;margin-bottom:4px;">Error state after bad login</div>
+          <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;">vwo-login-error-state-chromium-win32.png</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">TC-VR-03</div>
+          <div style="font-size:11px;color:#b8b8d0;margin-bottom:4px;">Email field filled state</div>
+          <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;">vwo-login-email-filled-chromium-win32.png</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Why visual regression is the right Week 3/4 addon:</strong> Week 2 closed the API testing gap. Week 3/4 closes the visual regression gap. Together: functional UI tests (Weeks 1-3), API contract tests (Week 2), visual regression (Week 3/4). That is a complete test pyramid. No previous approach in this portfolio covers what a pixel-level regression looks like — and 80% of SDET job descriptions for product companies mention it.
+      </div>
+    </div>
+
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -1468,15 +1850,15 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
        ═══════════════════════════════════════════════════════════════ -->
 
   <div class="fade-up delay-2" style="margin-top: 56px;">
-    <div class="section-title">Portfolio Progression — 4 Approaches</div>
+    <div class="section-title">Portfolio Progression — 5 Approaches</div>
 
     <!-- PROGRESSION TIMELINE -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:32px;">
 
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;position:relative;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">WEEK 0 · APPROACH 1</div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Block_A_Manual</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Manual STLC — all 6 phases on VWO Login PRD. No automation. Pure QA process thinking.</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">Block_A_Manual</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Manual STLC — all 6 phases on VWO Login PRD. No automation. Pure QA process thinking.</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
           <span style="font-size:9px;background:rgba(107,107,138,0.15);border:1px solid var(--border);color:var(--muted);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">Manual</span>
           <span style="font-size:9px;background:rgba(107,107,138,0.15);border:1px solid var(--border);color:var(--muted);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">STLC</span>
@@ -1485,10 +1867,10 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);padding:3px 10px;border-radius:100px;display:inline-block;">Done</div>
       </div>
 
-      <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:14px;padding:18px;position:relative;">
+      <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:14px;padding:16px;position:relative;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px;">WEEK 1A · APPROACH 2</div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">STLC_MCP_Project</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Playwright MCP + JIRA MCP. 43 DOM elements. 13 tests, 5 browsers. KAN-1 via MCP. 4.5× speed.</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">STLC_MCP_Project</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Playwright MCP + JIRA MCP. 43 DOM elements. 13 tests, 5 browsers. KAN-1 via MCP. 4.5× speed.</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
           <span style="font-size:9px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:var(--accent3);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">MCP</span>
           <span style="font-size:9px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:var(--accent3);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">JIRA</span>
@@ -1497,10 +1879,10 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);padding:3px 10px;border-radius:100px;display:inline-block;">Done</div>
       </div>
 
-      <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:14px;padding:18px;position:relative;">
+      <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:14px;padding:16px;position:relative;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.1em;margin-bottom:8px;">WEEK 1B · APPROACH 3</div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">STLC_Standard_CLI</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Standard Playwright CLI. POM + TypeScript. 18/18 tests, 3 browsers, GitHub Actions CI. KAN-1.</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">STLC_Standard_CLI</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Standard Playwright CLI. POM + TypeScript. 18/18 tests, 3 browsers, GitHub Actions CI. KAN-1.</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
           <span style="font-size:9px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);color:var(--accent2);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">POM</span>
           <span style="font-size:9px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);color:var(--accent2);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">TypeScript</span>
@@ -1509,17 +1891,29 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);padding:3px 10px;border-radius:100px;display:inline-block;">Done</div>
       </div>
 
-      <div style="background:rgba(52,211,153,0.06);border:2px solid rgba(52,211,153,0.35);border-radius:14px;padding:18px;position:relative;">
-        <div style="position:absolute;top:-10px;right:14px;background:var(--green);color:#0a0a0f;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 10px;border-radius:100px;letter-spacing:0.05em;">LATEST</div>
+      <div style="background:rgba(52,211,153,0.05);border:1px solid rgba(52,211,153,0.2);border-radius:14px;padding:16px;position:relative;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">WEEK 2 · APPROACH 4</div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Playwright_CLI</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;">UI + API testing. request fixture. testData.ts. Dual config. 20/20 tests. KAN-2 via JIRA MCP.</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">Playwright_CLI</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px;">UI + API testing. request fixture. testData.ts. Dual config. 20/20 tests. KAN-2 via JIRA MCP.</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
           <span style="font-size:9px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);color:var(--green);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">API Testing</span>
           <span style="font-size:9px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);color:var(--green);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">CRUD</span>
           <span style="font-size:9px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);color:var(--green);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">KAN-2</span>
         </div>
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);padding:3px 10px;border-radius:100px;display:inline-block;">Done</div>
+      </div>
+
+      <div style="background:rgba(167,139,250,0.07);border:2px solid rgba(167,139,250,0.4);border-radius:14px;padding:16px;position:relative;">
+        <div style="position:absolute;top:-10px;right:14px;background:var(--accent3);color:#1a0a2e;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 10px;border-radius:100px;letter-spacing:0.05em;">LATEST</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent3);letter-spacing:0.1em;margin-bottom:8px;">WEEK 3/4 · APPROACH 5</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">Playwright_AI_Agents</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Planner + Generator + Healer agents. Visual regression. seed.spec.ts. 3/3 VR tests passing.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span style="font-size:9px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);color:var(--accent3);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">AI Agents</span>
+          <span style="font-size:9px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);color:var(--accent3);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">Visual Reg</span>
+          <span style="font-size:9px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);color:var(--accent3);padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;">Self-Heal</span>
+        </div>
+        <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.25);padding:3px 10px;border-radius:100px;display:inline-block;">In Progress</div>
       </div>
 
     </div>
@@ -1716,6 +2110,117 @@ playwright-cli <span class="fn">screenshot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
       </div>
     </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WEEK 3/4 — PLAYWRIGHT AI AGENTS + VISUAL REGRESSION
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="fade-up delay-3" style="margin-top: 16px;">
+    <div class="section-title">Week 3/4 — Playwright AI Agents + Visual Regression</div>
+
+    <div style="background:var(--surface);border:1px solid rgba(167,139,250,0.3);border-radius:20px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(167,139,250,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:20px;flex-wrap:wrap;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);letter-spacing:0.1em;margin-bottom:6px;">APPROACH 5 · VWO LOGIN · PLANNER + GENERATOR + HEALER + VISUAL REGRESSION</div>
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;">Playwright_AI_Agents/</div>
+          <div style="font-size:13px;color:var(--muted);">Built-in AI agents · toHaveScreenshot() · seed.spec.ts · self-healing loop</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex-shrink:0;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent3);">3/3</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;">visual tests</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent2);">3</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;">AI agents</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--green);">PNG</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;">baselines committed</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--orange);">TBD</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;">agent-gen tests</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THREE AGENTS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+        <div style="background:var(--card);border:1px solid rgba(99,102,241,0.3);border-top:3px solid #534AB7;border-radius:10px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#AFA9EC;margin-bottom:6px;letter-spacing:0.08em;">AGENT 1</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Planner</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Navigates live DOM via <span style="color:#AFA9EC;font-family:'JetBrains Mono',monospace;">planner_setup_page</span>. Runs seed.spec.ts first. Writes Markdown test plan to specs/.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b8a;">Input: seed + prompt → Output: vwo_login_plan.md</div>
+        </div>
+        <div style="background:var(--card);border:1px solid rgba(34,211,238,0.3);border-top:3px solid #0F6E56;border-radius:10px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#5DCAA5;margin-bottom:6px;letter-spacing:0.08em;">AGENT 2</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Generator</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Reads plan, opens browser via <span style="color:#5DCAA5;font-family:'JetBrains Mono',monospace;">generator_setup_page</span>. Verifies selectors live. Writes TypeScript spec files.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b8a;">Input: vwo_login_plan.md → Output: tests/login/*.spec.ts</div>
+        </div>
+        <div style="background:var(--card);border:1px solid rgba(251,146,60,0.3);border-top:3px solid #854F0B;border-radius:10px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#FAC775;margin-bottom:6px;letter-spacing:0.08em;">AGENT 3</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Healer</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Replays failing steps. Inspects current DOM. Patches locator or assertion. Re-runs until passing. Self-healing automation.</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b8a;">Input: failing test → Output: patched passing test</div>
+        </div>
+      </div>
+
+      <!-- SEED.SPEC.TS CALLOUT -->
+      <div class="callout" style="border-left-color:var(--accent3);background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.25);margin-bottom:20px;">
+        <strong>seed.spec.ts is not a regular test.</strong> Before the planner or generator explores the browser, it runs seed.spec.ts via the <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;">planner_setup_page</span> and <span style="color:var(--accent3);font-family:'JetBrains Mono',monospace;">generator_setup_page</span> tools. The seed navigates to the target and calls <span style="color:var(--accent2);font-family:'JetBrains Mono',monospace;">page.pause()</span> — keeping the browser alive and handing the session to the agent to explore. Without pause() the browser closes immediately.
+      </div>
+
+      <!-- VISUAL REGRESSION -->
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);letter-spacing:0.08em;margin-bottom:12px;">VISUAL REGRESSION — toHaveScreenshot() — KEY ADDON</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px;">TC-VR-01</div>
+            <div style="font-size:11px;color:#b8b8d0;">Default page state — form clipped baseline</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;">vwo-login-default-chromium-win32.png</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px;">TC-VR-02</div>
+            <div style="font-size:11px;color:#b8b8d0;">Error state after invalid login — form baseline</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;">vwo-login-error-state-chromium-win32.png</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px;">TC-VR-03</div>
+            <div style="font-size:11px;color:#b8b8d0;">Email field filled — form baseline</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;">vwo-login-email-filled-chromium-win32.png</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6;">VWO has a dynamic animated background — clipping to form bounding box gives stable baselines. 3/3 passing. PNG files committed to repo. CI compares on every push.</div>
+      </div>
+
+      <!-- CODE SNIPPET -->
+      <div class="code-snip">
+<span class="cm"># How visual regression works — two phases</span><br><br>
+<span class="cm"># Phase 1 — create baselines (first run)</span><br>
+npx playwright test tests/visual/ <span class="kw">--update-snapshots</span><br>
+<span class="cm"># → saves vwo-login-default-chromium-win32.png to snapshots/</span><br><br>
+<span class="cm"># Phase 2 — comparison (every run after)</span><br>
+npx playwright test tests/visual/<br>
+<span class="cm"># → compares pixel-by-pixel against baseline</span><br>
+<span class="cm"># → fails with diff image if VWO changes their UI</span><br><br>
+<span class="cm"># seed.spec.ts — hands browser to agent</span><br>
+<span class="kw">test</span>(<span class="str">'seed'</span>, <span class="kw">async</span> ({ <span class="var">page</span> }) => {<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'/#/login'</span>);<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">waitForLoadState</span>(<span class="str">'networkidle'</span>);<br>
+&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">pause</span>(); <span class="cm">← agent takes control here</span><br>
+});
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+        <a href="https://github.com/somasaic/sdet-stlc-portfolio/tree/main/Playwright_AI_Agents" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">⬡ Playwright_AI_Agents/ ↗</a>
+        <a href="https://playwright.dev/docs/test-agents" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;">↗ Playwright Agents Docs</a>
+      </div>
+    </div>
+  </div>
+
 
 
 </div>
