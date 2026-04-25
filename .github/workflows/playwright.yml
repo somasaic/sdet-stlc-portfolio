@@ -21,18 +21,30 @@ jobs:
           node-version: "18"
           cache: "npm"
 
-      - name: Install dependencies (root)
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Install Playwright_AI_Agents dependencies
+        working-directory: Playwright_AI_Agents
+        run: npm install
+
+      - name: Install Playwright_CLI dependencies
+        working-directory: Playwright_CLI
+        run: npm install
+
+      - name: Install STLC_Standard_CLI dependencies
+        working-directory: STLC_Standard_CLI
+        run: npm install
+
+      - name: Install STLC_MCP_Project dependencies
+        working-directory: STLC_MCP_Project
         run: npm install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Install dependencies (STLC_MCP_Project)
-        working-directory: STLC_MCP_Project
-        run: npm install
-
-      - name: Run Playwright tests
-        run: npm run test:mcp
+      - name: Run all Playwright tests
+        run: npm test
         env:
           CI: true
 

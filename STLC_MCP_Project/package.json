@@ -8,10 +8,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "playwright test 04_Test_Execution/tests/",
-    "test:ui": "playwright test --ui 04_Test_Execution/tests/",
-    "test:debug": "playwright test --debug 04_Test_Execution/tests/",
-    "test:headed": "playwright test --headed 04_Test_Execution/tests/"
+    "test": "playwright test --config=04_Test_Execution/playwright.config.ts 04_Test_Execution/tests/",
+    "test:ui": "playwright test --config=04_Test_Execution/playwright.config.ts --ui 04_Test_Execution/tests/",
+    "test:debug": "playwright test --config=04_Test_Execution/playwright.config.ts --debug 04_Test_Execution/tests/",
+    "test:headed": "playwright test --config=04_Test_Execution/playwright.config.ts --headed 04_Test_Execution/tests/"
   },
   "keywords": [],
   "author": "Soma Sai Dinesh",
