@@ -2,9 +2,9 @@ name: Playwright Tests — VWO Login STLC
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -18,17 +18,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
-      - name: Install dependencies
+      - name: Install dependencies (root)
         run: npm install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
+      - name: Install dependencies (STLC_MCP_Project)
+        working-directory: STLC_MCP_Project
+        run: npm install
+
       - name: Run Playwright tests
-        run: npx playwright test STLC_MCP_Project/04_Test_Execution/tests/
+        run: npm run test:mcp
         env:
           CI: true
 

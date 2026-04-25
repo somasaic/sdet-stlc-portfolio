@@ -1,0 +1,24 @@
+{
+  "name": "stlc_mcp_project",
+  "version": "1.0.0",
+  "description": "STLC MCP Project - Test Execution Phase",
+  "main": "index.js",
+  "directories": {
+    "test": "04_Test_Execution/tests",
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "playwright test 04_Test_Execution/tests/",
+    "test:ui": "playwright test --ui 04_Test_Execution/tests/",
+    "test:debug": "playwright test --debug 04_Test_Execution/tests/",
+    "test:headed": "playwright test --headed 04_Test_Execution/tests/"
+  },
+  "keywords": [],
+  "author": "Soma Sai Dinesh",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  }
+}

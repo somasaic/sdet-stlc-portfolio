@@ -4,7 +4,12 @@
   "description": "**Soma Sai Dinesh** | QA Automation Engineer | Bengaluru",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:ai-agents && npm run test:cli && npm run test:standard-cli && npm run test:mcp",
+    "test:ai-agents": "cd Playwright_AI_Agents && npm test",
+    "test:cli": "cd Playwright_CLI && npm test",
+    "test:standard-cli": "cd STLC_Standard_CLI && npm test",
+    "test:mcp": "cd STLC_MCP_Project && npm test",
+    "install:all": "npm install && cd Playwright_AI_Agents && npm install && cd ../Playwright_CLI && npm install && cd ../STLC_Standard_CLI && npm install && cd ../STLC_MCP_Project && npm install"
   },
   "repository": {
     "type": "git",
