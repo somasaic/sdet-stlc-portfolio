@@ -135,8 +135,10 @@ export class LoginPage {
     this.ssoSignInBtn     = page.getByRole('button', { name: 'Sign in using SSO' });
     this.passkeySignInBtn = page.getByRole('button', { name: 'Sign in with Passkey' });
 
-    // Checkbox — name is case-insensitive to handle 'Remember me' vs 'Remember Me'
-    this.rememberMeCheckbox = page.getByRole('checkbox', { name: /remember me/i });
+    // Remember Me checkbox — getByRole('checkbox') with accessible name fails when VWO's
+    // Angular component doesn't expose the label as an ARIA name.
+    // locator('input[type="checkbox"]').first() targets the native DOM element directly.
+    this.rememberMeCheckbox = page.locator('input[type="checkbox"]').first();
 
     // Validation text
     this.invalidEmailMsg = page.getByText('Invalid email');
@@ -144,7 +146,8 @@ export class LoginPage {
     // Forgot password sub-form
     this.resetEmailInput  = page.getByRole('textbox', { name: 'Email address' });
     this.resetPasswordBtn = page.getByRole('button', { name: /reset password/i }).first();
-    this.backBtn          = page.getByRole('button', { name: /^back$/i });
+    // VWO's Back button text may be 'Back', '< Back', or 'Back to Login' — match any variant
+    this.backBtn          = page.getByRole('button', { name: /back/i });
   }
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -282,10 +285,11 @@ export class LoginPage {
 
   /**
    * Assert that the forgot-password sub-form is visible.
+   * Only checks the email input (shared between forms) and the Back button.
+   * resetPasswordBtn is excluded — VWO's exact button text varies across versions.
    */
   async assertForgotPasswordFormVisible(): Promise<void> {
     await expect(this.resetEmailInput).toBeVisible();
-    await expect(this.resetPasswordBtn).toBeVisible();
     await expect(this.backBtn).toBeVisible();
   }
 

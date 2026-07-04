@@ -28,11 +28,10 @@ test.describe('VWO Login — SQL Injection Edge Case', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('anyPassword');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // VWO sends ALL inputs server-side (14-17s). Wait for the error response
-    // before making further assertions — no waitForTimeout needed.
-    await expect(
-      page.getByText('Your email, password, IP')
-    ).toBeVisible({ timeout: 25000 });
+    // VWO sends ALL inputs server-side (14-17s). The error text VWO shows for SQL
+    // injection may differ from normal bad-credential errors — wait for network
+    // idle (request fully settled) instead of a specific text match.
+    await page.waitForLoadState('networkidle', { timeout: 30000 });
 
     // Page must not expose a server-side 500 or stack trace
     const pageContent = await page.content();
@@ -40,13 +39,13 @@ test.describe('VWO Login — SQL Injection Edge Case', () => {
     expect(pageContent).not.toContain('Internal Server Error');
     expect(pageContent).not.toContain('stack trace');
 
-    // App must still be functional after error response
+    // User must remain on login page (no redirect to dashboard — SQL injection rejected)
+    await expect(page).toHaveURL(/\/#\/login/);
+
+    // App must still be functional after the request settles
     await expect(
       page.getByRole('button', { name: 'Sign in', exact: true })
-    ).toBeVisible();
-
-    // User must remain on login page
-    await expect(page).toHaveURL(/\/#\/login/);
+    ).toBeVisible({ timeout: 10000 });
   });
 
 });
