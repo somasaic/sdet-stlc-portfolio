@@ -1,4 +1,4 @@
-name: Playwright Tests — VWO Login STLC
+name: Playwright Tests — VWO Login STLC Portfolio
 
 on:
   push:
@@ -6,60 +6,172 @@ on:
   pull_request:
     branches: [main]
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 4 independent jobs — one per automation project.
+# Each job installs its own dependencies + Playwright browsers so there is
+# no version mismatch between the root package (1.58.x) and sub-project
+# packages (1.59.x). Block_A_Manual is documentation only — no CI job.
+# ─────────────────────────────────────────────────────────────────────────────
+
 jobs:
-  test:
+
+  # ── Project 2: Playwright AI Agents ────────────────────────────────────────
+  # AI-generated specs via Claude Code loop (planner + generator agents).
+  # Visual regression tests are skipped in CI — baselines are Windows-specific.
+  test-ai-agents:
+    name: "Playwright AI Agents"
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Playwright_AI_Agents
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
           cache: "npm"
+          cache-dependency-path: Playwright_AI_Agents/package-lock.json
 
-      - name: Install root dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Install Playwright_AI_Agents dependencies
-        working-directory: Playwright_AI_Agents
-        run: npm install
+      - name: Install Playwright browsers (chromium)
+        run: npx playwright install --with-deps chromium
 
-      - name: Install Playwright_CLI dependencies
-        working-directory: Playwright_CLI
-        run: npm install
-
-      - name: Install STLC_Standard_CLI dependencies
-        working-directory: STLC_Standard_CLI
-        run: npm install
-
-      - name: Install STLC_MCP_Project dependencies
-        working-directory: STLC_MCP_Project
-        run: npm install
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: Run all Playwright tests
-        run: npm test
+      - name: Run tests
+        run: npx playwright test
         env:
           CI: true
 
-      - name: Upload Playwright HTML report
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: ai-agents-report
+          path: Playwright_AI_Agents/playwright-report/
+          retention-days: 14
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
+  # ── Project 3: Playwright CLI ───────────────────────────────────────────────
+  # POM + API tests (reqres.in). UI tests run always; API tests require the
+  # REQRES_API_KEY secret — they self-skip when the secret is absent.
+  test-cli:
+    name: "Playwright CLI"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Playwright_CLI
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: Playwright_CLI/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers (chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run UI tests
+        run: npx playwright test --project ui
+        env:
+          CI: true
+
+      - name: Run API tests (self-skip when REQRES_API_KEY is absent)
+        run: npx playwright test --project api
+        env:
+          CI: true
+          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results
-          path: test-results/
-          retention-days: 30
+          name: cli-report
+          path: Playwright_CLI/playwright-report/
+          retention-days: 14
+
+  # ── Project 5: STLC Standard CLI ───────────────────────────────────────────
+  # Manual STLC phases executed via standard Playwright CLI — chromium only in
+  # CI (firefox + webkit are available for local full-matrix runs).
+  test-standard-cli:
+    name: "STLC Standard CLI"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: STLC_Standard_CLI
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: STLC_Standard_CLI/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers (chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run tests — chromium only in CI
+        run: npx playwright test --project chromium
+        env:
+          CI: true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: standard-cli-report
+          path: STLC_Standard_CLI/playwright-report/
+          retention-days: 14
+
+  # ── Project 4: STLC MCP Project ────────────────────────────────────────────
+  # Full 6-phase STLC via Playwright MCP. Valid-login tests (TC_LOGIN_001 +
+  # TC_LOGIN_005) self-skip unless VWO_TEST_EMAIL + VWO_TEST_PASSWORD secrets
+  # are configured. Chromium only in CI — full 5-browser matrix available locally.
+  test-mcp:
+    name: "STLC MCP Project"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: STLC_MCP_Project
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: STLC_MCP_Project/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers (chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run tests — chromium only; valid-login self-skips without credentials
+        run: npx playwright test --config=04_Test_Execution/playwright.config.ts --project chromium
+        env:
+          CI: true
+          VWO_TEST_EMAIL: ${{ secrets.VWO_TEST_EMAIL }}
+          VWO_TEST_PASSWORD: ${{ secrets.VWO_TEST_PASSWORD }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcp-report
+          path: STLC_MCP_Project/playwright-report/
+          retention-days: 14

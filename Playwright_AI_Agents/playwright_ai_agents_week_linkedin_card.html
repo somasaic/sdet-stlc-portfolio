@@ -1,0 +1,168 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.card { background: #0d1117; border-radius: 16px; padding: 32px 36px 28px; max-width: 680px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.top-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #AFA9EC; margin-bottom: 10px; }
+.headline { font-size: 20px; font-weight: 700; color: #f0f6fc; line-height: 1.25; margin-bottom: 6px; }
+.headline span { color: #AFA9EC; }
+.sub { font-size: 12px; color: #8b949e; margin-bottom: 20px; line-height: 1.5; }
+.divider { border: none; border-top: 1px solid #21262d; margin: 0 0 18px; }
+
+.agent-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+.agent { border-radius: 10px; padding: 14px; }
+.a1 { background: #1a1630; border: 1px solid #534AB7; }
+.a2 { background: #0d1f18; border: 1px solid #0F6E56; }
+.a3 { background: #1f1a0d; border: 1px solid #854F0B; }
+.agent-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 6px; }
+.a1 .agent-badge { color: #AFA9EC; }
+.a2 .agent-badge { color: #5DCAA5; }
+.a3 .agent-badge { color: #FAC775; }
+.agent-name { font-size: 13px; font-weight: 600; color: #f0f6fc; margin-bottom: 6px; }
+.agent-desc { font-size: 10px; color: #8b949e; line-height: 1.5; }
+.agent-io { font-size: 9px; font-family: monospace; margin-top: 8px; padding: 6px 8px; background: #0d1117; border-radius: 4px; }
+.a1 .agent-io { color: #AFA9EC; }
+.a2 .agent-io { color: #5DCAA5; }
+.a3 .agent-io { color: #FAC775; }
+
+.flow { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.fnode { font-size: 10px; font-family: monospace; padding: 4px 10px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
+.fn-p { background: #1a1630; color: #AFA9EC; border: 1px solid #534AB7; }
+.fn-g { background: #0d1f18; color: #5DCAA5; border: 1px solid #0F6E56; }
+.fn-h { background: #1f1a0d; color: #FAC775; border: 1px solid #854F0B; }
+.fn-seed { background: #161b22; color: #8b949e; border: 1px solid #30363d; }
+.fn-out { background: #0a1f18; color: #5DCAA5; border: 1px solid #1D9E75; }
+.farr { color: #30363d; font-size: 14px; }
+
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+.diff-card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 10px 12px; }
+.diff-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; color: #8b949e; margin-bottom: 6px; }
+.diff-title { font-size: 11px; font-weight: 600; color: #f0f6fc; margin-bottom: 4px; }
+.diff-desc { font-size: 10px; color: #8b949e; line-height: 1.4; }
+.diff-badge { display: inline-block; font-size: 9px; padding: 1px 6px; border-radius: 4px; margin-top: 6px; font-weight: 600; }
+.db-p { background: #1a1630; color: #AFA9EC; }
+.db-cli { background: #0d1f18; color: #5DCAA5; }
+.db-ag { background: #0f172a; color: #85B7EB; }
+
+.metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin-bottom: 18px; }
+.met { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 10px 8px; text-align: center; }
+.met-num { font-size: 18px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+.met-label { font-size: 8px; color: #8b949e; line-height: 1.3; }
+
+.vr-row { background: #0d1f18; border: 1px solid #1D9E7544; border-left: 2px solid #5DCAA5; border-radius: 0 8px 8px 0; padding: 10px 14px; margin-bottom: 18px; }
+.vr-title { font-size: 10px; font-weight: 700; color: #5DCAA5; letter-spacing: 0.08em; margin-bottom: 6px; }
+.vr-desc { font-size: 11px; color: #9fe1cb; line-height: 1.6; }
+
+.links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.lnk { font-size: 10px; font-family: monospace; padding: 5px 12px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.lnk-gh { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.3); color: #AFA9EC; }
+.lnk-pg { background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.2); color: #22d3ee; }
+.lnk-jira { background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.2); color: #fb923c; }
+
+.footer-row { display: flex; justify-content: space-between; align-items: flex-end; }
+.chips { display: flex; gap: 5px; flex-wrap: wrap; }
+.chip { font-size: 9px; background: #21262d; color: #8b949e; padding: 2px 7px; border-radius: 3px; font-family: monospace; }
+.name-block { text-align: right; }
+.name { font-size: 11px; font-weight: 600; color: #f0f6fc; }
+.role { font-size: 9px; color: #8b949e; }
+</style>
+
+<div class="card">
+  <div class="top-label">SDET PORTFOLIO — WEEK 3/4 · APPROACH 5 OF 5</div>
+  <div class="headline">The AI writes the tests.<br>The AI fixes the tests.<br><span>You own the strategy.</span></div>
+  <div class="sub">Playwright built-in AI Agents — planner, generator, healer — applied to full STLC on VWO Login. Plus Visual Regression as the key addon skill no previous approach covered.</div>
+
+  <hr class="divider">
+
+  <div class="agent-row">
+    <div class="agent a1">
+      <div class="agent-badge">AGENT 1 — PLANNER</div>
+      <div class="agent-name">Explores → Plans</div>
+      <div class="agent-desc">Navigates live DOM via planner_setup_page. Reads accessibility tree. Discovers all elements. Writes human-readable Markdown test plan.</div>
+      <div class="agent-io">seed.spec.ts → specs/vwo_login_plan.md</div>
+    </div>
+    <div class="agent a2">
+      <div class="agent-badge">AGENT 2 — GENERATOR</div>
+      <div class="agent-name">Plan → Code</div>
+      <div class="agent-desc">Reads plan, opens browser, verifies every selector live against real DOM before writing. Produces TypeScript spec files with assertions.</div>
+      <div class="agent-io">vwo_login_plan.md → tests/*.spec.ts</div>
+    </div>
+    <div class="agent a3">
+      <div class="agent-badge">AGENT 3 — HEALER</div>
+      <div class="agent-name">Fails → Fixes</div>
+      <div class="agent-desc">Replays failing steps in live browser. Inspects current DOM. Patches broken locator or assertion. Re-runs until green. Self-healing.</div>
+      <div class="agent-io">failing test → patched passing spec</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="fnode fn-seed">seed.spec.ts</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-p">Planner</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-seed">specs/plan.md</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-g">Generator</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-seed">tests/*.spec.ts</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-h">Healer</div>
+    <div class="farr">→</div>
+    <div class="fnode fn-out">All green</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="diff-label">VS PLAYWRIGHT MCP</div>
+      <div class="diff-title">Different purpose</div>
+      <div class="diff-desc">MCP = browser control server (ad hoc). Agents = structured clients with defined output. Same protocol — completely different jobs.</div>
+      <div class="diff-badge db-p">MCP is infrastructure</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-label">VS PLAYWRIGHT CLI</div>
+      <div class="diff-title">Who writes the tests</div>
+      <div class="diff-desc">CLI: SDET writes every line. Agents: planner + generator write the code. SDET owns prompt design, review, and healer decisions.</div>
+      <div class="diff-badge db-cli">SDET role shifts</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-label">KEY ADDON</div>
+      <div class="diff-title">Visual Regression</div>
+      <div class="diff-desc">toHaveScreenshot() — pixel baseline comparison. Catches CSS regressions functional tests miss. VWO animated bg solved via clip:boundingBox().</div>
+      <div class="diff-badge db-ag">3/3 passing</div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="met"><div class="met-num" style="color:#AFA9EC">5</div><div class="met-label">scenarios planned</div></div>
+    <div class="met"><div class="met-num" style="color:#5DCAA5">3/3</div><div class="met-label">visual tests passing</div></div>
+    <div class="met"><div class="met-num" style="color:#FAC775">1m</div><div class="met-label">planner run time</div></div>
+    <div class="met"><div class="met-num" style="color:#85B7EB">5</div><div class="met-label">STLC phases done</div></div>
+  </div>
+
+  <div class="vr-row">
+    <div class="vr-title">WHY VISUAL REGRESSION IS THE RIGHT WEEK 3/4 ADDON</div>
+    <div class="vr-desc">Functional tests pass even when your button colour changes, your form shifts 20px, or your logo becomes a broken image. toHaveScreenshot() catches all of that. Baselines committed to repo. CI compares on every push. This is what product SDETs do — and almost nobody at 1-3 years can demonstrate it.</div>
+  </div>
+
+  <div class="links">
+    <a class="lnk lnk-gh" href="https://github.com/somasaic/sdet-stlc-portfolio/tree/main/Playwright_AI_Agents">⬡ Playwright_AI_Agents/ ↗</a>
+    <a class="lnk lnk-pg" href="https://somasaic.github.io/sdet-stlc-portfolio">↗ somasaic.github.io/sdet-stlc-portfolio</a>
+    <a class="lnk lnk-jira" href="https://somasaicheviti.atlassian.net/browse/KAN-3">🐛 KAN-3 JIRA ↗</a>
+  </div>
+
+  <div class="footer-row">
+    <div class="chips">
+      <span class="chip">planner agent</span>
+      <span class="chip">generator agent</span>
+      <span class="chip">healer agent</span>
+      <span class="chip">toHaveScreenshot</span>
+      <span class="chip">seed.spec.ts</span>
+      <span class="chip">Claude Code</span>
+    </div>
+    <div class="name-block">
+      <div class="name">Soma Sai Dinesh Cheviti</div>
+      <div class="role">QA Automation Engineer · Bengaluru</div>
+    </div>
+  </div>
+</div>

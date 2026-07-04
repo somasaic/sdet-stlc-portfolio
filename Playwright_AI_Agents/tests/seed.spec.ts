@@ -3,16 +3,12 @@ import { test, expect } from '@playwright/test';
 /**
  * seed.spec.ts — VWO Login Page
  *
- * This is NOT a regular test. It is a bootstrap file for Playwright AI Agents.
+ * Bootstrap file for Playwright AI Agents (--loop=claude).
+ * Planner and Generator call planner_setup_page / generator_setup_page
+ * which runs this file first to set up the browser context.
  *
- * What it does:
- * - Planner agent calls planner_setup_page → runs this file first
- * - Generator agent calls generator_setup_page → runs this file first
- * - Navigates to VWO login page and confirms it is ready
- * - Hands the open browser session to the agent to explore
- *
- * Target: https://app.vwo.com/#/login
- * No authentication required — login page is publicly accessible
+ * NOTE: No page.pause() — Claude Code loop handles session handoff
+ * differently from VS Code loop. pause() causes MCP to hang on Windows.
  */
 
 test('seed', async ({ page }) => {
@@ -23,5 +19,9 @@ test('seed', async ({ page }) => {
     page.getByRole('textbox', { name: 'Email address' })
   ).toBeVisible();
 
-  await page.pause();
+  await expect(
+    page.getByRole('button', { name: 'Sign in', exact: true })
+  ).toBeVisible();
+
+  // Seed complete — browser context ready for agent exploration
 });
