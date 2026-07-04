@@ -7,10 +7,16 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
+  // VWO server-side credential validation takes 14-17 seconds.
+  // Default 5s assertion timeout causes all negative-login tests to fail in CI.
+  expect: {
+    timeout: 25000,
+  },
   use: {
     baseURL: 'https://app.vwo.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    actionTimeout: 25000,
   },
   projects: [
     {
