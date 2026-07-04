@@ -1,0 +1,185 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.card { background: #0d1117; border-radius: 16px; padding: 36px 40px 32px; max-width: 680px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.week-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: #5DCAA5; margin-bottom: 10px; }
+.headline { font-size: 19px; font-weight: 700; color: #f0f6fc; line-height: 1.3; margin-bottom: 18px; }
+.headline span { color: #5DCAA5; }
+
+.steps { display: flex; gap: 0; margin-bottom: 20px; align-items: stretch; }
+.step { flex: 1; background: #161b22; border: 1px solid #30363d; padding: 12px 14px; position: relative; }
+.step:first-child { border-radius: 8px 0 0 8px; }
+.step:last-child { border-radius: 0 8px 8px 0; border: 2px solid #5DCAA5; background: #0d1f18; }
+.step-arrow { display: flex; align-items: center; padding: 0 4px; background: #0d1117; }
+.step-arrow-line { width: 12px; height: 1px; background: #30363d; }
+.step-arrow-tip { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid #30363d; }
+.step-num { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 5px; }
+.step-name { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+.step-tag { font-size: 9px; font-family: monospace; padding: 2px 5px; border-radius: 3px; display: inline-block; margin-bottom: 7px; }
+.step-points li { font-size: 9px; color: #8b949e; padding: 1px 0; list-style: none; line-height: 1.4; }
+.step-points li::before { content: "· "; }
+
+.s1 .step-num { color: #6e7681; }
+.s1 .step-name { color: #c9d1d9; }
+.s1 .step-tag { background: #21262d; color: #6e7681; }
+
+.s2 .step-num { color: #AFA9EC; }
+.s2 .step-name { color: #c8c3f5; }
+.s2 .step-tag { background: #1a1f2e; color: #AFA9EC; }
+
+.s3 .step-num { color: #85B7EB; }
+.s3 .step-name { color: #c5daf5; }
+.s3 .step-tag { background: #0f1a2e; color: #85B7EB; }
+
+.s4 .step-num { color: #5DCAA5; }
+.s4 .step-name { color: #9fe1cb; }
+.s4 .step-tag { background: #0a1f18; color: #5DCAA5; }
+
+.now-badge { font-size: 8px; font-weight: 700; background: #5DCAA5; color: #04342C; padding: 2px 8px; border-radius: 8px; display: inline-block; margin-bottom: 6px; letter-spacing: 0.04em; }
+
+.divider { border: none; border-top: 1px solid #21262d; margin: 0 0 18px; }
+
+.what-new { margin-bottom: 18px; }
+.what-new-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #5DCAA5; margin-bottom: 12px; }
+.improvements { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.imp { background: #161b22; border: 1px solid #21262d; border-left: 2px solid; border-radius: 0 7px 7px 0; padding: 10px 12px; }
+.imp-label { font-size: 10px; font-weight: 600; margin-bottom: 4px; }
+.imp-desc { font-size: 10px; color: #8b949e; line-height: 1.5; }
+.imp-vs { font-size: 9px; color: #6e7681; margin-top: 4px; font-family: monospace; }
+
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 18px; }
+.metric { background: #161b22; border: 1px solid #21262d; border-radius: 7px; padding: 10px 8px; text-align: center; }
+.metric-num { font-size: 17px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+.metric-label { font-size: 8px; color: #8b949e; line-height: 1.3; }
+
+.insight { background: #0d1f18; border: 1px solid #1D9E7544; border-left: 2px solid #5DCAA5; border-radius: 0 7px 7px 0; padding: 10px 14px; margin-bottom: 18px; }
+.insight-text { font-size: 11px; color: #9fe1cb; line-height: 1.6; }
+
+.footer-row { display: flex; justify-content: space-between; align-items: center; }
+.chips { display: flex; gap: 5px; flex-wrap: wrap; }
+.chip { font-size: 9px; background: #21262d; color: #8b949e; padding: 2px 7px; border-radius: 3px; font-family: monospace; }
+.name-block { text-align: right; }
+.name { font-size: 11px; font-weight: 600; color: #f0f6fc; }
+.role { font-size: 9px; color: #8b949e; }
+</style>
+
+<div class="card">
+  <div class="week-label">SDET PORTFOLIO — WEEK 2 · PLAYWRIGHT CLI</div>
+  <div class="headline">What the 4th approach builds<br>that the first three <span>couldn't</span>.</div>
+
+  <div class="steps">
+    <div class="step s1">
+      <div class="step-num">01 · MANUAL</div>
+      <div class="step-name">Block_A</div>
+      <div class="step-tag">No tools</div>
+      <ul class="step-points">
+        <li>PRD → hand-written TCs</li>
+        <li>~90 min effort</li>
+        <li>No automation</li>
+      </ul>
+    </div>
+    <div class="step-arrow"><div class="step-arrow-line"></div><div class="step-arrow-tip"></div></div>
+    <div class="step s2">
+      <div class="step-num">02 · MCP</div>
+      <div class="step-name">Playwright MCP</div>
+      <div class="step-tag">AI agent</div>
+      <ul class="step-points">
+        <li>43 DOM elements</li>
+        <li>~20 min · 4.5× faster</li>
+        <li>UI tests only</li>
+      </ul>
+    </div>
+    <div class="step-arrow"><div class="step-arrow-line"></div><div class="step-arrow-tip"></div></div>
+    <div class="step s3">
+      <div class="step-num">03 · STD CLI</div>
+      <div class="step-name">Standard CLI</div>
+      <div class="step-tag">npx playwright</div>
+      <ul class="step-points">
+        <li>POM + TypeScript</li>
+        <li>18/18 · 3 browsers</li>
+        <li>UI tests only</li>
+      </ul>
+    </div>
+    <div class="step-arrow"><div class="step-arrow-line"></div><div class="step-arrow-tip"></div></div>
+    <div class="step s4">
+      <div class="now-badge">THIS WEEK</div>
+      <div class="step-num">04 · CLI + API</div>
+      <div class="step-name">Playwright CLI</div>
+      <div class="step-tag">UI + API</div>
+      <ul class="step-points">
+        <li>request fixture</li>
+        <li>20/20 · 14× speed</li>
+        <li>UI + API combined</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="what-new">
+    <div class="what-new-title">WHAT APPROACH 4 ADDS OVER THE PREVIOUS THREE</div>
+    <div class="improvements">
+      <div class="imp" style="border-left-color: #5DCAA5;">
+        <div class="imp-label" style="color: #5DCAA5;">API testing — zero before this</div>
+        <div class="imp-desc">request fixture sends HTTP directly. No browser. GET POST PUT DELETE. 10 API tests in 3.9s.</div>
+        <div class="imp-vs">MCP + Standard CLI → UI only</div>
+      </div>
+      <div class="imp" style="border-left-color: #85B7EB;">
+        <div class="imp-label" style="color: #85B7EB;">testData.ts — typed inputs</div>
+        <div class="imp-desc">All credentials in one typed file. No hardcoded strings in spec files. DRY principle applied to test data.</div>
+        <div class="imp-vs">Standard CLI → hardcoded values</div>
+      </div>
+      <div class="imp" style="border-left-color: #AFA9EC;">
+        <div class="imp-label" style="color: #AFA9EC;">Dual project config</div>
+        <div class="imp-desc">ui project + api project in one playwright.config.ts. Different baseURL, different headers, one CI run.</div>
+        <div class="imp-vs">Standard CLI → 1 project only</div>
+      </div>
+      <div class="imp" style="border-left-color: #FAC775;">
+        <div class="imp-label" style="color: #FAC775;">Edge cases + security inputs</div>
+        <div class="imp-desc">SQL injection, 500-char boundary, special chars, whitespace-only. Week 1 had zero edge tests.</div>
+        <div class="imp-vs">All previous → only happy path edges</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-num" style="color:#5DCAA5">20/20</div>
+      <div class="metric-label">Tests passed</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num" style="color:#85B7EB">3.9s</div>
+      <div class="metric-label">10 API tests</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num" style="color:#FAC775">14×</div>
+      <div class="metric-label">API vs UI speed</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num" style="color:#AFA9EC">KAN-2</div>
+      <div class="metric-label">JIRA via MCP</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-text">
+      Standard CLI proved I can build a framework. Playwright CLI proves I can extend one.
+      Same config file. Same CI pipeline. UI tests in 54s. API tests in 3.9s. One report.
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <div class="chips">
+      <span class="chip">request fixture</span>
+      <span class="chip">testData.ts</span>
+      <span class="chip">extraHTTPHeaders</span>
+      <span class="chip">dotenv</span>
+      <span class="chip">GitHub Actions</span>
+      <span class="chip">JIRA MCP</span>
+    </div>
+    <div class="name-block">
+      <div class="name">Soma Sai Dinesh Cheviti</div>
+      <div class="role">QA Automation Engineer · Bengaluru</div>
+    </div>
+  </div>
+</div>

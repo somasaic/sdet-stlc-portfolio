@@ -21,14 +21,21 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Bug Report — KAN-2', () => {
 
+  // Self-skip when REQRES_API_KEY is not configured (reqres.in requires a key)
+  test.skip(!process.env.REQRES_API_KEY, 'Set REQRES_API_KEY secret to run API tests');
+
   test('KAN-2: POST /api/register returns 200 instead of expected 201 (Created) — BUG', async ({ request }) => {
     /**
      * REST convention: POST that creates a new resource should return 201 Created.
      * ReqRes returns 200 OK for successful registration — this is incorrect.
      *
-     * This test INTENTIONALLY FAILS to document the bug.
+     * test.fail() marks this as an EXPECTED failure — the test PASSES in CI
+     * when the assertion fails (confirming the bug is still open), and FAILS
+     * in CI if the assertion unexpectedly passes (meaning the bug was fixed).
      * KAN-2 has been logged in JIRA at somasaicheviti.atlassian.net
      */
+    test.fail(true, 'KAN-2: /api/register returns 200 instead of 201 — known bug, open in JIRA');
+
     const response = await request.post('/api/register', {
       data: {
         email: 'eve.holt@reqres.in',
@@ -38,7 +45,7 @@ test.describe('Bug Report — KAN-2', () => {
 
     // Actual: response.status() === 200
     // Expected per REST convention: 201 Created
-    // This assertion FAILS — which is the point. The bug is real.
+    // This assertion "fails" — test.fail() above makes that the expected outcome.
     expect(response.status()).toBe(201);
   });
 

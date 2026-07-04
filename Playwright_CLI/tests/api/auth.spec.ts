@@ -3,6 +3,9 @@ import { apiData, endpoints } from '../../data/testData';
 
 test.describe('ReqRes API — Authentication Endpoints', () => {
 
+  // reqres.in requires an API key — self-skip when REQRES_API_KEY secret is absent
+  test.skip(!process.env.REQRES_API_KEY, 'Set REQRES_API_KEY secret to run API tests');
+
   test('TC-API-01: POST /api/login — valid credentials returns 200 + token', async ({ request }) => {
     const response = await request.post(endpoints.login, {
       data: apiData.validLogin,

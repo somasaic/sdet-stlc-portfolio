@@ -3,6 +3,9 @@ import { apiData, endpoints } from '../../data/testData';
 
 test.describe('ReqRes API — User Resource Endpoints', () => {
 
+  // reqres.in requires an API key — self-skip when REQRES_API_KEY secret is absent
+  test.skip(!process.env.REQRES_API_KEY, 'Set REQRES_API_KEY secret to run API tests');
+
   test('TC-API-06: GET /api/users?page=2 — returns 200 + paginated list of users', async ({ request }) => {
     const response = await request.get(`${endpoints.users}?page=2`);
 
