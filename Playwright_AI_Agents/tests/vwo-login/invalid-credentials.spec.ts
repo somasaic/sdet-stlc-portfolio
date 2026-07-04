@@ -27,8 +27,12 @@ test.describe('VWO Login — Invalid Credentials', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('WrongPassword123!');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // Server-side validation — wait up to 20 seconds for error
-    await expect(page.getByRole('alert')).toBeVisible({ timeout: 20000 });
+    // VWO server-side validation takes 14-17 seconds.
+    // Error text: 'Your email, password, IP address or account may be blocked.'
+    // VWO does NOT use role="alert" — partial text match via getByText is correct.
+    await expect(
+      page.getByText('Your email, password, IP')
+    ).toBeVisible({ timeout: 30000 });
 
     // User must NOT be redirected to dashboard
     await expect(page).toHaveURL(/\/#\/login/);
@@ -46,8 +50,10 @@ test.describe('VWO Login — Invalid Credentials', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('wrongpassword');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // Same vague error — not "email not found" vs "wrong password"
-    await expect(page.getByRole('alert')).toBeVisible({ timeout: 20000 });
+    // Same vague error — VWO does not reveal whether email or password was wrong
+    await expect(
+      page.getByText('Your email, password, IP')
+    ).toBeVisible({ timeout: 30000 });
 
     // User remains on login page
     await expect(page).toHaveURL(/\/#\/login/);

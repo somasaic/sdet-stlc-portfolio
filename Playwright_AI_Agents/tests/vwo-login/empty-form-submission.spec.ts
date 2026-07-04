@@ -20,11 +20,14 @@ test.describe('VWO Login — Empty Form Submission', () => {
     ).toBeVisible();
   });
 
-  test('TC-empty-01: empty form shows client-side validation within 5 seconds', async ({ page }) => {
+  test('TC-empty-01: empty form submission shows error message', async ({ page }) => {
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // Client-side — fast response, no server call needed
-    await expect(page.getByRole('alert')).toBeVisible({ timeout: 5000 });
+    // VWO sends even empty-form credentials to the server — response takes 14-17s.
+    // Error text confirmed via live test: 'Your email, password, IP address or account may be blocked.'
+    await expect(
+      page.getByText('Your email, password, IP')
+    ).toBeVisible({ timeout: 25000 });
 
     // Must remain on login page
     await expect(page).toHaveURL(/\/#\/login/);
@@ -35,13 +38,15 @@ test.describe('VWO Login — Empty Form Submission', () => {
     ).toBeVisible();
   });
 
-  test('TC-empty-02: email filled, password empty shows error', async ({ page }) => {
+  test('TC-empty-02: email filled, password empty shows error message', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Email address' }).fill('test@wingify.com');
 
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // Error appears — partial form not accepted
-    await expect(page.getByRole('alert')).toBeVisible({ timeout: 5000 });
+    // Partial form also triggers server-side validation — error takes up to 17s
+    await expect(
+      page.getByText('Your email, password, IP')
+    ).toBeVisible({ timeout: 25000 });
 
     // Remains on login page
     await expect(page).toHaveURL(/\/#\/login/);
