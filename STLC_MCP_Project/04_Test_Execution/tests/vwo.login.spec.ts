@@ -217,13 +217,28 @@ test.describe('VWO Login Page — Authentication Tests', () => {
   // ═══════════════════════════════════════════════════════════════════════════
 
   test('TC_LOGIN_006 — Forgot Password navigates to reset form and Back returns to login', async ({ page }) => {
-    // VWO navigates to a completely separate route (e.g. /#/forgot-password) when
-    // Forgot Password is clicked. The forgot-password page CSS-hides the login form's
-    // email input and shows its own input with a different accessible name.
-    // Neither resetEmailInput ('Email address') nor the Back button accessible name
-    // could be confirmed without live DOM access on the forgot-password route.
-    // Marking fixme so the test is skipped in CI until the actual DOM is audited.
-    test.fixme(true, 'TC_LOGIN_006: VWO forgot-password page DOM differs from login form — resetEmailInput and backBtn accessible names unverified. Audit VWO /#/forgot-password DOM and update locators.');
+    // ── Precondition: main login form is visible ──────────────────────────────
+    await loginPage.assertLoginFormVisible();
+    await expect(loginPage.forgotPasswordBtn).toBeVisible();
+
+    // ── Act: Click Forgot Password ────────────────────────────────────────────
+    await loginPage.clickForgotPassword();
+
+    // ── Assert: Forgot-password sub-form is now visible ───────────────────────
+    // VWO keeps both forms in the DOM simultaneously — login form inputs remain
+    // in DOM but are hidden. resetEmailInput targets #forgot-password-username
+    // by ID to avoid strict mode violation with #login-username still in tree.
+    await loginPage.assertForgotPasswordFormVisible();
+
+    // Sign In button belongs to the login form — not visible on forgot-password form
+    await expect(loginPage.signInBtn).not.toBeVisible();
+
+    // ── Act: Click Back ───────────────────────────────────────────────────────
+    await loginPage.clickBack();
+
+    // ── Assert: Main login form is restored ───────────────────────────────────
+    await loginPage.assertLoginFormVisible();
+    await expect(loginPage.forgotPasswordBtn).toBeVisible();
   });
 
   // ═══════════════════════════════════════════════════════════════════════════

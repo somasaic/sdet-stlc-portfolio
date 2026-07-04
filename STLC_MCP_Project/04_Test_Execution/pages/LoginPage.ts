@@ -120,8 +120,11 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
 
-    // Inputs — accessible names confirmed via live DOM audit (seed.spec.ts)
-    this.emailInput    = page.getByRole('textbox', { name: 'Email address' });
+    // emailInput — scoped to login form by stable ID.
+    // VWO keeps both login (#login-username) and forgot-password (#forgot-password-username)
+    // inputs in the DOM simultaneously. getByRole('textbox', {name:'Email address'}) matches
+    // both once the forgot-password form is opened, causing a strict mode violation.
+    this.emailInput    = page.locator('#login-username');
     this.passwordInput = page.getByRole('textbox', { name: 'Password' });
 
     // Buttons — main login form
@@ -143,8 +146,10 @@ export class LoginPage {
     // Validation text
     this.invalidEmailMsg = page.getByText('Invalid email');
 
-    // Forgot password sub-form
-    this.resetEmailInput  = page.getByRole('textbox', { name: 'Email address' });
+    // Forgot password sub-form — email input uses the specific forgot-password form ID.
+    // Both #login-username and #forgot-password-username share accessible name 'Email address';
+    // targeting by ID avoids the strict mode violation.
+    this.resetEmailInput  = page.locator('#forgot-password-username');
     this.resetPasswordBtn = page.getByRole('button', { name: /reset password/i }).first();
     // VWO's Back button text may be 'Back', '< Back', or 'Back to Login' — match any variant
     this.backBtn          = page.getByRole('button', { name: /back/i });
