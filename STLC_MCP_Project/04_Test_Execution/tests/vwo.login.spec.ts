@@ -75,6 +75,10 @@ test.describe('VWO Login Page — Authentication Tests', () => {
   // ═══════════════════════════════════════════════════════════════════════════
 
   test('TC_LOGIN_001 — Valid login with registered credentials', async ({ page }) => {
+    // Requires a real VWO account — skip unless VWO_TEST_EMAIL + VWO_TEST_PASSWORD
+    // are configured as GitHub Secrets (or local env vars).
+    test.skip(!process.env.VWO_TEST_EMAIL, 'Valid login requires VWO_TEST_EMAIL and VWO_TEST_PASSWORD env vars');
+
     // ── Arrange ──────────────────────────────────────────────────────────────
     // Precondition verified by beforeEach (email field visible = page ready)
 
@@ -196,6 +200,8 @@ test.describe('VWO Login Page — Authentication Tests', () => {
     page,
     context,
   }: { page: import('@playwright/test').Page; context: BrowserContext }) => {
+    // Requires a real VWO account to complete the login flow and verify cookie.
+    test.skip(!process.env.VWO_TEST_EMAIL, 'Remember Me cookie test requires VWO_TEST_EMAIL and VWO_TEST_PASSWORD env vars');
     // ── Arrange — Verify default unchecked state ──────────────────────────────
     await expect(loginPage.rememberMeCheckbox).not.toBeChecked();
 

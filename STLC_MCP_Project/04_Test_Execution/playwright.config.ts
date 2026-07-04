@@ -23,6 +23,12 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0, // Retry flaky tests on CI only
   workers: process.env.CI ? 1 : undefined,
 
+  // VWO server-side credential validation takes 14-17 seconds.
+  // Default 5s assertion timeout causes negative-login tests to fail in CI.
+  expect: {
+    timeout: 25000,
+  },
+
   // ── Reporting ───────────────────────────────────────────────────────────────
   reporter: [
     ['list'],                          // Real-time console output
@@ -33,7 +39,7 @@ export default defineConfig({
   // ── Shared test options ─────────────────────────────────────────────────────
   use: {
     baseURL:            'https://app.vwo.com',
-    actionTimeout:      10_000,    // Max ms for any single action (click, fill…)
+    actionTimeout:      25_000,    // Max ms for any single action — covers VWO 14-17s response
     navigationTimeout:  30_000,    // Max ms for page.goto() / waitForURL()
     trace:              'on-first-retry',  // Capture trace on flaky retry
     screenshot:         'only-on-failure', // Screenshot on test failure

@@ -120,9 +120,9 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
 
-    // Inputs
-    this.emailInput    = page.getByRole('textbox', { name: 'Enter email ID' });
-    this.passwordInput = page.getByRole('textbox', { name: 'Enter password' });
+    // Inputs — accessible names confirmed via live DOM audit (seed.spec.ts)
+    this.emailInput    = page.getByRole('textbox', { name: 'Email address' });
+    this.passwordInput = page.getByRole('textbox', { name: 'Password' });
 
     // Buttons — main login form
     this.passwordToggleBtn = page.getByRole('button', { name: 'Toggle password visibility' }).first();

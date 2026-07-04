@@ -14,11 +14,14 @@
 export const BASE_URL = 'https://app.vwo.com/#/login';
 
 // ─── Valid credentials ────────────────────────────────────────────────────────
+// Read from environment variables so real credentials can be injected via
+// GitHub Secrets (VWO_TEST_EMAIL + VWO_TEST_PASSWORD) without committing them.
+// Tests that require these credentials call test.skip(!process.env.VWO_TEST_EMAIL).
 
 export const VALID_USER = {
-  email:    'test@vwo.com',
-  password: 'Valid@Pass123',
-} as const;
+  email:    process.env.VWO_TEST_EMAIL    ?? 'test@vwo.com',
+  password: process.env.VWO_TEST_PASSWORD ?? 'Valid@Pass123',
+};
 
 // ─── Invalid / negative scenarios ────────────────────────────────────────────
 
@@ -62,7 +65,7 @@ export const REMEMBER_ME = {
   cookieName:         'auth_token',
   /** Persistent cookie must have a maxAge > 0 */
   minCookieMaxAge:    1,
-} as const;
+};
 
 // ─── Forgot Password flow ─────────────────────────────────────────────────────
 
