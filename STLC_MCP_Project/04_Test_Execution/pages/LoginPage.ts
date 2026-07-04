@@ -125,7 +125,8 @@ export class LoginPage {
     this.passwordInput = page.getByRole('textbox', { name: 'Password' });
 
     // Buttons — main login form
-    this.passwordToggleBtn = page.getByRole('button', { name: 'Toggle password visibility' }).first();
+    // Toggle button aria-label varies across browsers — regex catches 'Toggle password visibility', 'Show password', etc.
+    this.passwordToggleBtn = page.getByRole('button', { name: /toggle|show|hide.*password/i }).first();
     this.forgotPasswordBtn = page.getByRole('button', { name: 'Forgot Password?' });
     this.signInBtn         = page.getByRole('button', { name: 'Sign in' }).first();
 
@@ -134,16 +135,16 @@ export class LoginPage {
     this.ssoSignInBtn     = page.getByRole('button', { name: 'Sign in using SSO' });
     this.passkeySignInBtn = page.getByRole('button', { name: 'Sign in with Passkey' });
 
-    // Checkbox
-    this.rememberMeCheckbox = page.getByRole('checkbox', { name: 'Remember me' });
+    // Checkbox — name is case-insensitive to handle 'Remember me' vs 'Remember Me'
+    this.rememberMeCheckbox = page.getByRole('checkbox', { name: /remember me/i });
 
     // Validation text
     this.invalidEmailMsg = page.getByText('Invalid email');
 
     // Forgot password sub-form
     this.resetEmailInput  = page.getByRole('textbox', { name: 'Email address' });
-    this.resetPasswordBtn = page.getByRole('button', { name: 'Reset Password' }).first();
-    this.backBtn          = page.getByRole('button', { name: 'Back' });
+    this.resetPasswordBtn = page.getByRole('button', { name: /reset password/i }).first();
+    this.backBtn          = page.getByRole('button', { name: /^back$/i });
   }
 
   // ══════════════════════════════════════════════════════════════════════════

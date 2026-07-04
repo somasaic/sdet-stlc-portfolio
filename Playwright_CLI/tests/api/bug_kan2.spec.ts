@@ -10,7 +10,8 @@ import { test, expect } from '@playwright/test';
  * successful registration. It returns 200 (OK) instead. Per REST API
  * conventions, resource creation should return 201 Not 200.
  *
- * Severity: Low | Priority: Low | Status: Open in JIRA as KAN-2
+ * Severity: Low | Priority: Low | Status: Open in JIRA as KAN-28
+ * JIRA: https://somasaicheviti-1780804851917.atlassian.net/browse/KAN-28
  *
  * To run this file:
  *   npx playwright test --project=api tests/api/bug_kan2.spec.ts
@@ -19,12 +20,12 @@ import { test, expect } from '@playwright/test';
  * It proves the bug exists and is documented.
  */
 
-test.describe('Bug Report — KAN-2', () => {
+test.describe('Bug Report — KAN-28', () => {
 
   // Self-skip when REQRES_API_KEY is not configured (reqres.in requires a key)
   test.skip(!process.env.REQRES_API_KEY, 'Set REQRES_API_KEY secret to run API tests');
 
-  test('KAN-2: POST /api/register returns 200 instead of expected 201 (Created) — BUG', async ({ request }) => {
+  test('KAN-28: POST /api/register returns 200 instead of expected 201 (Created) — BUG', async ({ request }) => {
     /**
      * REST convention: POST that creates a new resource should return 201 Created.
      * ReqRes returns 200 OK for successful registration — this is incorrect.
@@ -32,9 +33,9 @@ test.describe('Bug Report — KAN-2', () => {
      * test.fail() marks this as an EXPECTED failure — the test PASSES in CI
      * when the assertion fails (confirming the bug is still open), and FAILS
      * in CI if the assertion unexpectedly passes (meaning the bug was fixed).
-     * KAN-2 has been logged in JIRA at somasaicheviti.atlassian.net
+     * KAN-28 logged in JIRA: somasaicheviti-1780804851917.atlassian.net/browse/KAN-28
      */
-    test.fail(true, 'KAN-2: /api/register returns 200 instead of 201 — known bug, open in JIRA');
+    test.fail(true, 'KAN-28: /api/register returns 200 instead of 201 — known bug, open in JIRA');
 
     const response = await request.post('/api/register', {
       data: {
@@ -49,7 +50,7 @@ test.describe('Bug Report — KAN-2', () => {
     expect(response.status()).toBe(201);
   });
 
-  test('KAN-2: Confirm actual behaviour — POST /api/register returns 200 (documents the bug)', async ({ request }) => {
+  test('KAN-28: Confirm actual behaviour — POST /api/register returns 200 (documents the bug)', async ({ request }) => {
     /**
      * This companion test PASSES and documents what ReqRes actually returns.
      * Both tests together tell the full story:
@@ -74,7 +75,7 @@ test.describe('Bug Report — KAN-2', () => {
     expect(body.id).toBeDefined();
 
     // Logging the bug details in test output
-    console.log('KAN-2 Bug confirmed: /api/register returned', response.status(), '— expected 201');
+    console.log('KAN-28 Bug confirmed: /api/register returned', response.status(), '— expected 201');
     console.log('Response body:', JSON.stringify(body));
   });
 

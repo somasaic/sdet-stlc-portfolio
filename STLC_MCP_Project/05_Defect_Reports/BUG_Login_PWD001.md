@@ -4,7 +4,7 @@
 
 **Project:** VWO Login Dashboard  
 **URL:** https://app.vwo.com/#/login  
-**JIRA Board:** somasaicheviti.atlassian.net/jira/software/projects/KAN  
+**JIRA Board:** somasaicheviti-1780804851917.atlassian.net/jira/software/projects/KAN  
 **Approach:** Bug logged directly to JIRA via MCP — no manual entry  
 
 ---
@@ -25,16 +25,16 @@ KAN-1 Bug Ticket
 
 ---
 
-## Bug Report — KAN-1
+## Bug Report — KAN-27
 
 | Field | Detail |
 |---|---|
-| **Issue Key** | KAN-1 |
-| **Project** | VWO Login STLC |
+| **Issue Key** | KAN-27 |
+| **Project** | QA Testing (KAN) |
 | **Type** | Bug |
 | **Priority** | High |
 | **Status** | To Do |
-| **URL** | https://somasaicheviti.atlassian.net/browse/KAN-1 |
+| **URL** | https://somasaicheviti-1780804851917.atlassian.net/browse/KAN-27 |
 
 ---
 
@@ -88,11 +88,11 @@ KAN-1 Bug Ticket
 
 ---
 
-## Bug Lifecycle — KAN-1 in JIRA
+## Bug Lifecycle — KAN-27 in JIRA
 
 | Status | Who Acts | What Happens |
 |---|---|---|
-| **To Do** | QA Engineer | Bug logged via JIRA MCP — KAN-1 created |
+| **To Do** | QA Engineer | Bug logged via JIRA MCP — KAN-27 created |
 | **In Progress** | Developer | Developer assigned, fixing password validation logic |
 | **In Review** | QA Lead | Fix reviewed before marking complete |
 | **Done** | QA Engineer | Retest with `abc`, `123456` — error now shows — bug closed |

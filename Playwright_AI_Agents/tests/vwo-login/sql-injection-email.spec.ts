@@ -28,16 +28,19 @@ test.describe('VWO Login — SQL Injection Edge Case', () => {
     await page.getByRole('textbox', { name: 'Password' }).fill('anyPassword');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-    // Wait for response — could be client or server side
-    await page.waitForTimeout(5000);
+    // VWO sends ALL inputs server-side (14-17s). Wait for the error response
+    // before making further assertions — no waitForTimeout needed.
+    await expect(
+      page.getByText('Your email, password, IP')
+    ).toBeVisible({ timeout: 25000 });
 
-    // Page must not show a 500 error
+    // Page must not expose a server-side 500 or stack trace
     const pageContent = await page.content();
     expect(pageContent).not.toContain('500');
     expect(pageContent).not.toContain('Internal Server Error');
     expect(pageContent).not.toContain('stack trace');
 
-    // App must still be functional — Sign in button still present
+    // App must still be functional after error response
     await expect(
       page.getByRole('button', { name: 'Sign in', exact: true })
     ).toBeVisible();

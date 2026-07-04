@@ -1,0 +1,7 @@
+# Environment variables — never commit credentials
+.env
+
+# Playwright output
+node_modules/
+playwright-report/
+test-results/
