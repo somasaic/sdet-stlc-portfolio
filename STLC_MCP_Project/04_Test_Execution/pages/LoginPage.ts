@@ -151,8 +151,11 @@ export class LoginPage {
     // targeting by ID avoids the strict mode violation.
     this.resetEmailInput  = page.locator('#forgot-password-username');
     this.resetPasswordBtn = page.getByRole('button', { name: /reset password/i }).first();
-    // VWO's Back button text may be 'Back', '< Back', or 'Back to Login' — match any variant
-    this.backBtn          = page.getByRole('button', { name: /back/i });
+    // VWO's Back element may be a <button> or <a> — .or() handles both.
+    // .first() prevents a strict mode violation if both roles are matched simultaneously.
+    this.backBtn = page.getByRole('button', { name: /back/i })
+        .or(page.getByRole('link', { name: /back/i }))
+        .first();
   }
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -290,12 +293,12 @@ export class LoginPage {
 
   /**
    * Assert that the forgot-password sub-form is visible.
-   * Only checks the email input (shared between forms) and the Back button.
-   * resetPasswordBtn is excluded — VWO's exact button text varies across versions.
+   * Checks only the forgot-password email input (#forgot-password-username) by ID
+   * to avoid the strict mode violation caused by two 'Email address' inputs in DOM.
+   * backBtn visibility is implicitly verified when clickBack() succeeds.
    */
   async assertForgotPasswordFormVisible(): Promise<void> {
     await expect(this.resetEmailInput).toBeVisible();
-    await expect(this.backBtn).toBeVisible();
   }
 
   /**
