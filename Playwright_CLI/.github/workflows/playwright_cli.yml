@@ -31,13 +31,9 @@ jobs:
         working-directory: Playwright_CLI
         run: npx playwright install --with-deps
 
-      - name: Run API tests (fast — no browser required)
+      - name: Run Playwright tests
         working-directory: Playwright_CLI
-        run: npx playwright test --project=api
-
-      - name: Run UI tests
-        working-directory: Playwright_CLI
-        run: npx playwright test --project=ui
+        run: npx playwright test
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4

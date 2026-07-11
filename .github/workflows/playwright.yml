@@ -79,13 +79,8 @@ jobs:
       - name: Install Playwright browsers (chromium)
         run: npx playwright install --with-deps chromium
 
-      - name: Run UI tests
-        run: npx playwright test --project ui
-        env:
-          CI: true
-
-      - name: Run API tests (self-skip when REQRES_API_KEY is absent)
-        run: npx playwright test --project api
+      - name: Run all Playwright tests
+        run: npx playwright test
         env:
           CI: true
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
