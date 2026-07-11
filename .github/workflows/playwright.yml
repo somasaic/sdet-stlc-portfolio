@@ -1,6 +1,7 @@
 name: Playwright Tests — VWO Login STLC Portfolio
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -14,7 +15,6 @@ on:
 # ─────────────────────────────────────────────────────────────────────────────
 
 jobs:
-
   # ── Project 2: Playwright AI Agents ────────────────────────────────────────
   # AI-generated specs via Claude Code loop (planner + generator agents).
   # Visual regression tests are skipped in CI — baselines are Windows-specific.
