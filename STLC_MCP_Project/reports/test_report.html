@@ -149,7 +149,7 @@ body::before {
 .progress-bar-inner {
   height: 100%; border-radius: 100px;
   background: linear-gradient(90deg, var(--green), var(--accent2));
-  width: 62%; transition: width 1.5s ease;
+  width: 90%; transition: width 1.5s ease;
 }
 .progress-legend { display: flex; gap: 20px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
@@ -334,7 +334,7 @@ body::before {
   </div>
   <div class="topbar-right">
     <div class="status-pill">REPORT COMPLETE</div>
-    <div class="date-badge">March 2026</div>
+    <div class="date-badge">July 2026</div>
   </div>
 </div>
 
@@ -372,7 +372,7 @@ body::before {
       <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" class="nav-item">
         <div class="nav-dot" style="background:var(--muted)"></div>GitHub Repo
       </a>
-      <a href="https://somasaicheviti.atlassian.net/jira/software/projects/KAN/boards/1" target="_blank" class="nav-item">
+      <a href="https://somasaicheviti-1780804851917.atlassian.net/jira/software/projects/KAN/boards/1" target="_blank" class="nav-item">
         <div class="nav-dot" style="background:var(--muted)"></div>JIRA Board
       </a>
     </div>
@@ -395,7 +395,7 @@ body::before {
       <div class="hero-title">Test Execution Report<br>VWO Login Module</div>
       <div class="hero-meta">
         <div class="meta-item"><span class="meta-icon">🌐</span>app.vwo.com/#/login</div>
-        <div class="meta-item"><span class="meta-icon">📅</span>March 2026</div>
+        <div class="meta-item"><span class="meta-icon">📅</span>July 2026</div>
         <div class="meta-item"><span class="meta-icon">🎭</span>Playwright + TypeScript</div>
         <div class="meta-item"><span class="meta-icon">🤖</span>Playwright MCP + JIRA MCP</div>
         <div class="meta-item"><span class="meta-icon">⬡</span>github.com/somasaic/sdet-stlc-portfolio</div>
@@ -408,9 +408,9 @@ body::before {
         <div class="sum-num">8</div>
         <div class="sum-label">tests designed</div>
       </div>
-      <div class="sum-card yellow">
-        <div class="sum-num">8</div>
-        <div class="sum-label">pending execution</div>
+      <div class="sum-card green">
+        <div class="sum-num">5</div>
+        <div class="sum-label">passing in CI</div>
       </div>
       <div class="sum-card red">
         <div class="sum-num">1</div>
@@ -432,18 +432,18 @@ body::before {
         <div class="progress-header">
           <div>
             <div class="progress-title">Overall STLC Completion</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Phases 1–6 complete · Execution pending valid credentials</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Phases 1–6 complete · Verified green in GitHub Actions CI</div>
           </div>
-          <div class="progress-pct">62%</div>
+          <div class="progress-pct">90%</div>
         </div>
         <div class="progress-bar-outer">
           <div class="progress-bar-inner"></div>
         </div>
         <div class="progress-legend">
           <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Phases Complete (6/6)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>POM + Spec Ready (13 tests)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Execution Pending (needs credentials)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>1 Bug Open (KAN-1)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>13 Tests Running in CI (chromium)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>2 Tests Blocked (needs credentials)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>1 Bug Open (KAN-27)</div>
         </div>
       </div>
     </div>
@@ -453,7 +453,7 @@ body::before {
       <div class="sec-title">Test Case Execution Status</div>
 
       <div class="callout">
-        <strong>Note:</strong> All 8 test cases are designed with production-ready Playwright locators from the live MCP element audit. Execution status is Pending — requires valid VWO test account credentials. Infrastructure — POM, spec file, config, CI pipeline — is fully ready.
+        <strong>Note:</strong> All 8 test cases are designed with production-ready Playwright locators from the live MCP element audit and run automatically on every push via GitHub Actions CI (chromium). 5 pass, 1 documents a known VWO application gap — no client-side email/password validation (see <a href="https://somasaicheviti-1780804851917.atlassian.net/browse/KAN-27" target="_blank" style="color:var(--accent2)">KAN-27</a>) — and 2 (Valid Login, Remember Me) self-skip until <code>VWO_TEST_EMAIL</code> / <code>VWO_TEST_PASSWORD</code> credentials are configured as CI secrets.
       </div>
 
       <table class="tc-table">
@@ -472,56 +472,56 @@ body::before {
             <td><div class="tc-title">Valid Login — redirect to dashboard</div><div class="tc-feature">Authentication</div></td>
             <td><span class="badge badge-p1">P1</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-blocked">BLOCKED</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_002</td>
             <td><div class="tc-title">Invalid Password — error shown</div><div class="tc-feature">Authentication</div></td>
             <td><span class="badge badge-p1">P1</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Negative</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-pass">PASS</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_003</td>
             <td><div class="tc-title">Invalid Email Format — inline validation</div><div class="tc-feature">Input Validation</div></td>
             <td><span class="badge badge-p2">P2</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Validation</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-blocked">KNOWN ISSUE</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_004</td>
             <td><div class="tc-title">Empty Fields Submit — blocked</div><div class="tc-feature">Input Validation</div></td>
             <td><span class="badge badge-p1">P1</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Validation</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-pass">PASS</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_005</td>
             <td><div class="tc-title">Remember Me — session persists</div><div class="tc-feature">Session Management</div></td>
             <td><span class="badge badge-p2">P2</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-blocked">BLOCKED</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_006</td>
             <td><div class="tc-title">Forgot Password — navigation flow</div><div class="tc-feature">Navigation</div></td>
             <td><span class="badge badge-p2">P2</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Functional</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-pass">PASS</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_007</td>
             <td><div class="tc-title">Password Show/Hide Toggle</div><div class="tc-feature">UI Behaviour</div></td>
             <td><span class="badge badge-p3">P3</span></td>
             <td><span style="font-size:12px;color:var(--muted)">UI</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-pass">PASS</span></td>
           </tr>
           <tr>
             <td class="tc-id">TC_LOGIN_008</td>
             <td><div class="tc-title">Google OAuth — CSRF state param check</div><div class="tc-feature">OAuth</div></td>
             <td><span class="badge badge-p2">P2</span></td>
             <td><span style="font-size:12px;color:var(--muted)">Security</span></td>
-            <td><span class="badge badge-pending">PENDING</span></td>
+            <td><span class="badge badge-pass">PASS</span></td>
           </tr>
         </tbody>
       </table>
@@ -534,7 +534,7 @@ body::before {
       <div class="bug-card">
         <div class="bug-header">
           <div>
-            <div class="bug-id">🐛 KAN-1 · VWO Login STLC</div>
+            <div class="bug-id">🐛 KAN-27 · VWO Login STLC</div>
             <div class="bug-title">Password field accepts weak passwords without validation error</div>
             <div class="bug-meta">
               <span class="badge" style="background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)">HIGH SEVERITY</span>
@@ -665,7 +665,7 @@ body::before {
             <div class="phase-tags">
               <span class="phase-tag">LoginPage.ts</span>
               <span class="phase-tag">13 tests</span>
-              <span class="phase-tag" style="color:var(--yellow)">⏳ Pending run</span>
+              <span class="phase-tag" style="color:var(--green)">✓ Verified in CI</span>
             </div>
           </div>
         </div>
@@ -673,10 +673,10 @@ body::before {
           <div class="phase-num-box">05</div>
           <div class="phase-info">
             <div class="phase-name">Defect Reporting</div>
-            <div class="phase-output">KAN-1 logged directly to JIRA board via JIRA MCP — ADF formatted</div>
+            <div class="phase-output">KAN-27 logged directly to JIRA board via JIRA MCP — ADF formatted</div>
             <div class="phase-tags">
               <span class="phase-tag">JIRA MCP</span>
-              <span class="phase-tag">KAN-1</span>
+              <span class="phase-tag">KAN-27</span>
               <span class="phase-tag" style="color:var(--green)">✓ Complete</span>
             </div>
           </div>
@@ -752,11 +752,11 @@ body::before {
 <div class="report-footer">
   <div class="footer-left">
     <strong>Soma Sai Dinesh</strong> · QA Automation Engineer · Bengaluru ·
-    <span style="color:var(--muted)">STLC MCP Project · March 2026</span>
+    <span style="color:var(--muted)">STLC MCP Project · July 2026</span>
   </div>
   <div class="footer-links">
     <a href="https://github.com/somasaic/sdet-stlc-portfolio" target="_blank" class="footer-link">GitHub Repo ↗</a>
-    <a href="https://somasaicheviti.atlassian.net/jira/software/projects/KAN/boards/1" target="_blank" class="footer-link">KAN-1 ↗</a>
+    <a href="https://somasaicheviti-1780804851917.atlassian.net/browse/KAN-27" target="_blank" class="footer-link">KAN-27 ↗</a>
     <a href="https://www.linkedin.com/in/somasaidinesh/" target="_blank" class="footer-link">LinkedIn ↗</a>
   </div>
 </div>
@@ -775,7 +775,7 @@ body::before {
 
   // Animate progress bar on load
   setTimeout(() => {
-    document.querySelector('.progress-bar-inner').style.width = '62%';
+    document.querySelector('.progress-bar-inner').style.width = '90%';
   }, 500);
 </script>
 </body>
