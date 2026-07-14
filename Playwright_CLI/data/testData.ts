@@ -10,8 +10,8 @@ export interface UserPayload {
 
 export const apiData = {
   validLogin: {
-    email: 'eve.holt@reqres.in',
-    password: 'cityslicka',
+    email: process.env.VALID_LOGIN_EMAIL ?? '',
+    password: process.env.VALID_LOGIN_PASSWORD ?? '',
   } as LoginCredentials,
 
   invalidLogin: {
