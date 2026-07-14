@@ -84,6 +84,8 @@ jobs:
         env:
           CI: true
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+          VALID_LOGIN_EMAIL: ${{ secrets.VALID_LOGIN_EMAIL || 'eve.holt@reqres.in' }}
+          VALID_LOGIN_PASSWORD: ${{ secrets.VALID_LOGIN_PASSWORD || 'cityslicka' }}
 
       - uses: actions/upload-artifact@v4
         if: always()
