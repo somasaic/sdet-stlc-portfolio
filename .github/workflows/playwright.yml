@@ -91,7 +91,7 @@ jobs:
         if: always()
         with:
           name: cli-report
-          path: Playwright_CLI/playwright-report/
+          path: Playwright_CLI/reporter/
           retention-days: 14
 
   # ── Project 5: STLC Standard CLI ───────────────────────────────────────────

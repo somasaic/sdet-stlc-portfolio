@@ -129,7 +129,7 @@
 | API auth test suite | tests/api/auth.spec.ts |
 | API users test suite | tests/api/users.spec.ts |
 | CI pipeline | .github/workflows/playwright_cli.yml |
-| HTML test report | playwright-report/ (CI artifact) |
+| HTML test report | reporter/ (CI artifact) |
 
 ---
 

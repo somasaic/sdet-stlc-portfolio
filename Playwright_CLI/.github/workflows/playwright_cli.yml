@@ -42,5 +42,5 @@ jobs:
         if: always()
         with:
           name: playwright-cli-report
-          path: Playwright_CLI/playwright-report/
+          path: Playwright_CLI/reporter/
           retention-days: 30

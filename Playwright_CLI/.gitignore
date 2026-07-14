@@ -1,10 +1,12 @@
 node_modules/
 .env
 playwright-report/
+reporter/
 test-results/
 
 # Playwright
 /playwright-report/
+/reporter/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
